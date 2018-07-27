@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: HP/UvkAenTk5vyQXZYWsGOmNmhQgZtcZNqrwPGFdnMMee4+ycGMvF0af/Nj+vv8V0NHzVqQxOhzcdTi19H1/qU+jLNWL9TdmthZHqZ4vZFpIj3hYy9srts6O10IpjCG8Kmu+jYRpI1uwgSOnNymm2QEIYXb/78KDwpM+IYusY611aAX4M3459O5u0m3rU6S5G7cw9BXzZ7hPnK2UjQkRroOUy1NB9JBCvWrH1tWISKiaFm+WokUmg2mF3GEHo0NiyvNba37oRPBwaM0dtHQr0aiA8cu8E9DPrwM249JV1VlWEj78cFEowYF/hhATPN6G2mnHQAS/F1vE6IA/JFAiJFArIhrQM3xYLKgmH6qfGV1S6r6TPlxa3KrX7GIX8QqHg/Va07Z/HAuVVv+HTzaWzODn7LuTEdsdcQgxCwdGKKlW+wOWu7CAEchxKfawD9oLm0NxkkZ723C6axCXSp4jM72VMVkGcoHys1tmn0/yy1+jz0gFpO2DX32OMzp17hdL7iFdyClsYu3glyIGBSXYyab2nl6c6XG8cuHMlr4CciZ14vJAg5EObeS++mbk80iwevROOaIzF9kE6Kgp5/7G9PInd+Qz97RnQTtbisjQssUsEXCXLZanaAhwBskTm0yY/j87V5zH2vyRjQjywz6OrjYZcJB+87h07XuW9vwXA2o=
+  app: capture-app-83060
+  on:
+    repo: GilliganL/Capture
