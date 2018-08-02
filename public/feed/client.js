@@ -31,15 +31,28 @@ const MOCK_USER_FEED = {
 function listenForSubmitPost() {
     $('#postForm').on('submit', event => {
         event.preventDefault();
+
         let image = "http://lorempixel.com/640/480/food";
         let username = "Eldon.Jerde";
         let caption = 'Ipsam odio deserunt aliquam ea ratione suscipit. Ut sequi ut itaque dicta ea. Accusantium adipisci error sit eum et earum.';
 
-        MOCK_USER_FEED.feedPosts.push({username, image, caption});
+        //required fields
 
-        getAndDisplayFeedPosts();
+        $.ajax({
+            url: '/api/feed/',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': 'bearer ' + localStorage.token
+            },
+            data: JSON.stringify({
+                image, username, caption
+            }),
+            method: 'post'
+        })
+        .done(() => getAndDisplayFeedPosts());
     });
 }
+
 
 function getFeedPosts(callback) {
     //setTimeOut for asynchronous call
