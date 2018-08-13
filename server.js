@@ -17,12 +17,11 @@ app.use(morgan('common'));
 
 app.use(express.static('public'));
 
-
 app.use('/api/users', userRoutes);
 app.use('/api/feed', feedPostsRoutes);
 
 app.use((req, res, next) => {
-    res.sendStatus(404)
+    res.sendStatus(404);
     next();
 })
 
@@ -33,9 +32,6 @@ app.use((req, res, next, error) => {
 })
 
 //add runServer/closeServer
-// closeServer needs access to a server object, but that only
-// gets created when `runServer` runs, so we declare `server` here
-// and then assign a value to it in run
 let server;
 
 // this function connects to our database, then starts the server
