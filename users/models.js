@@ -1,7 +1,5 @@
 'use strict';
 
-// const uuid = require('uuid');
-
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
@@ -33,7 +31,7 @@ userSchema.virtual('location').get(function() {
 userSchema.methods.serialize = function() {
     return {
         id: this._id,
-        name: this.fullName,
+        fullName: this.fullName,
         userName: this.userName,
         location: this.location
     };

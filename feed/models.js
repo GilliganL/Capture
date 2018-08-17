@@ -1,14 +1,10 @@
 'use strict';
 
-// const uuid = require('uuid');
-
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-//import User model?
-
 const feedPostSchema = mongoose.Schema({
-    //do you have to use ID to reference user or can username be used?
+    //thinking of when you try to get more info on client side
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     image: {type: String, required: true},
     caption: {type: String},
@@ -32,11 +28,6 @@ feedPostSchema.methods.serialize = function() {
         created: this.created
     };
 };
-
-// feedPostSchema.pre('find', function(next) {
-//     this.populate('user');
-//     next();
-// });
 
 feedPostSchema.pre('findById', function(next) {
     this.populate('user');

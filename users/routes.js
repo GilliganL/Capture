@@ -1,10 +1,33 @@
+//users routes
+
 const express = require('express');
 const router = express.Router();
 const validator = require('validator');
 
 const { User } = require('./models');
 
-//search users with query - Separate GET route? or use query object here with if statement
+//search users with query from URL - Separate GET route? or use query object here with if statement
+//Use get endpoint, $search { $search: req.query.name }
+// { name: `*${req.query.name}*` }
+// {
+//     name: {
+//       $regex: `${req.query.name}`,
+//       $options: 'i'
+//     }
+//   } 
+// $or: [
+//     {
+//       name: {
+//         $regex: `${req.query.name}`,
+//         $options: 'i'
+//       }
+//     },     {
+//       name: {
+//         $regex: `${req.query.name}`,
+//         $options: 'i'
+//       }
+//     }, ] 
+
 router.get('/', (req, res) => {
     User
         .find()
@@ -20,15 +43,14 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     User
         .findById(req.params.id)
-        //add error if user doesn't exist, or use line 23?
-        //use this only for editting own profile, remove serialize?
+        //add error if user doesn't exist, or use line 23? Add if statement
+        //use this only for editting own profile, remove serialize from here & test?
         .then(user => res.status(201).json(user.serialize()))
         .catch(err => {
             console.error(err);
             res.status(500).json({error: 'something went wrong: get by ID'});
         });
 });
-
 
 router.post('/', (req, res) => {
     const requiredFields = ['firstName', 'lastName', 'userName', 'city', 'state', 'email'];
@@ -60,7 +82,7 @@ router.post('/', (req, res) => {
         return res.status(400).send(message);
     }
 
-    //validate state
+    //validate state abbreviation
 
     User
         .findOne({userName: req.body.userName})
@@ -108,7 +130,6 @@ router.put('/:id', (req, res) => {
     });
 
     User   
-    //will this create new user? How to validate fields if it doesn't pass through POST?
         .findByIdAndUpdate(req.params.id, {$set: updated}, {new: true})
         .then(updatedUser => res.status(201).json(updatedUser))
         .catch(err => {
@@ -120,10 +141,9 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
     User
         .findByIdAndRemove(req.params.id)
-        //add error if user ID doesn't exist or use line 114?
+        //add error if user ID doesn't exist or use line 114? add if statement
         .then(() => {
-    //success message doesn't come through
-            res.status(204).json({message: 'success'})
+            res.status(200).json({message: 'success'})
         })
         .catch(err => {
             console.error(err);

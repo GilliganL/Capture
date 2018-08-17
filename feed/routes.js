@@ -3,13 +3,12 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-// const validator = require('validator');
 
 const { User } = require('../users/models');
 const { FeedPost } = require('./models');
 
-//how do you set up pagination?
-//if someone updates a post (PUT) does GET need to be called again?
+//how do you set up pagination? .limit(10) and .skip(page*x) page comes from req
+//if someone updates a post (PUT) does GET need to be called again? call GET again
 router.get('/', (req, res) => {
     FeedPost
         .find()
@@ -53,7 +52,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    //user is person logged in
+    //user is person logged in: req.user has info about use who is logged in
     const requiredFields = ['user', 'image'];
     for(let i=0; i<requiredFields.length; i++) {
         const field = requiredFields[i];
