@@ -23,6 +23,7 @@ feedPostSchema.methods.serialize = function() {
     return {
         id: this._id,
         user: this.fullName,
+        userId: this.user._id,
         image: this.image,
         caption: this.caption,
         created: this.created

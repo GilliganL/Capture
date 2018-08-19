@@ -4,6 +4,8 @@
   "description": "Node capstone project",
   "main": "server.js",
   "dependencies": {
+    "aws-sdk": "^2.295.0",
+    "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "faker": "^4.1.0",
     "mongoose": "^5.2.6",

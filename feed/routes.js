@@ -3,9 +3,40 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const aws = require('aws-sdk');
 
 const { User } = require('../users/models');
 const { FeedPost } = require('./models');
+
+const { S3_BUCKET } = require('../config');
+
+aws.config.region='us-east-1';
+
+router.get('/sign-s3', (req, res) => {
+    const s3 = new aws.S3();
+    const fileName = req.query['file-name'];
+    const fileType = req.query['file-type'];
+    const s3Params = {
+        Bucket: S3_BUCKET,
+        Key: fileName,
+        Expires: 600,
+        ACL: 'public-read',
+        ContentType: fileType
+    };
+
+    s3.getSignedUrl('putObject', s3Params, (err, data) => {
+        if(err) {
+            console.log(err);
+            return res.end();
+        }
+        const returnData = {
+            signedRequest: data,
+            url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
+        };
+        res.write(JSON.stringify(returnData));
+        res.end();
+    });
+});
 
 //how do you set up pagination? .limit(10) and .skip(page*x) page comes from req
 //if someone updates a post (PUT) does GET need to be called again? call GET again
@@ -53,7 +84,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     //user is person logged in: req.user has info about use who is logged in
-    const requiredFields = ['user', 'image'];
+    const requiredFields = ['userId', 'image'];
     for(let i=0; i<requiredFields.length; i++) {
         const field = requiredFields[i];
         if(!(field in req.body)) {
@@ -66,18 +97,19 @@ router.post('/', (req, res) => {
     //validate file uploaded
 
     User
-        .findById(req.body.user._id)
+        .findById(req.body.userId)
         .then(user => {
             if(user) {
                 FeedPost   
                     .findOneAndUpdate({_id: new mongoose.Types.ObjectId()}, {
-                        user: req.body.user,
+                        user: req.body.userId,
                         image: req.body.image,
                         caption: req.body.caption
                     }, {upsert: true, new: true})
                     .populate('user')
                     .then(feedPost => res.status(201).json(feedPost.serialize()))
                     .catch(err => {
+            //get this error when user not found instead of line 117
                         console.error(err);
                         res.status(500).json({ error: 'Something went wrong: POST FeedPost'});
                     });
