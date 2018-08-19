@@ -1,0 +1,125 @@
+h1 {
+    text-align: center;
+    margin: 10px 0;
+}
+
+h2 {
+    text-align: center;
+    margin: 0;
+    font-weight: lighter; 
+}
+
+.nav-container {
+    display: flex;
+    background-color: rgb(198, 132, 211);
+    align-items: center;
+    justify-content: left;
+    width: 100%;
+    padding: 5px 12px;
+}
+
+.post-bar {
+    background-color: lightgoldenrodyellow;
+    padding: 5px 10px;
+}
+
+#post-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 5px 10px;
+}
+
+#post-form label,
+#post-form input, 
+#post-form button {
+    padding: 5px 10px;
+    margin: 5px;
+    text-align: center;
+}
+
+.flex-container {
+    /* padding: 0;
+    margin: 0; */
+    /* -ms-box-orient: horizontal;
+    display: -webkit-box;
+    display: -moz-box; */
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+
+.flex-item {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    text-align: center;
+}
+
+.flex-item-date {
+    order: 2;
+    text-align: center;
+    color: orange;
+    text-shadow: 2px 2px 5px black;
+    background: linear-gradient(
+        to right,
+        white 46%,
+        orange 46%,
+        orange 52%,
+        gray 52%,
+        white 56%
+    );
+    flex-basis: 100px;
+    display: flex;
+}
+
+.flex-item-content {
+    order: 3;
+    width: 80%;
+}
+
+.flex-item-hidden {
+    width: 80%;
+    order: 1;
+}
+
+.flex-item-flipped .flex-item-content {
+    order: 3;
+    text-align: center;
+}
+
+.flex-item-flipped .flex-item-hidden {
+order: 1;
+}
+
+.postImage {
+    width: 80%;
+    /*set max height of 500px while keeping aspect ratio*/
+}
+
+/* 640 px and above */
+@media only screen and (min-width: 600px) {
+
+    .flex-item-hidden, .flex-item-content {
+        width: 50%;
+    }
+
+    .flex-item-content {
+        text-align: left;
+    }
+
+    .flex-item-flipped .flex-item-content {
+            order: 1;
+            text-align: right;
+    }
+
+    .flex-item-flipped .flex-item-hidden {
+        order: 3;
+    }
+}
