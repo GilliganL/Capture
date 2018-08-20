@@ -18,7 +18,7 @@ router.get('/sign-s3', (req, res) => {
     const fileType = req.query['file-type'];
     const s3Params = {
         Bucket: S3_BUCKET,
-        Key: fileName,
+        Key: `feed-post-images/${fileName}`,
         Expires: 600,
         ACL: 'public-read',
         ContentType: fileType
@@ -31,7 +31,7 @@ router.get('/sign-s3', (req, res) => {
         }
         const returnData = {
             signedRequest: data,
-            url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
+            url: `https://${S3_BUCKET}.s3.amazonaws.com/feed-post-images/${fileName}`
         };
         res.write(JSON.stringify(returnData));
         res.end();
@@ -39,7 +39,6 @@ router.get('/sign-s3', (req, res) => {
 });
 
 //how do you set up pagination? .limit(10) and .skip(page*x) page comes from req
-//if someone updates a post (PUT) does GET need to be called again? call GET again
 router.get('/', (req, res) => {
     FeedPost
         .find()
@@ -53,14 +52,12 @@ router.get('/', (req, res) => {
         });
 });
 
-//get posts by User id
 router.get('/:id', (req, res) => {
     User
         .findById(req.params.id)
         .then(user => {
             if(user) {
                 FeedPost
-                //how to get this to work with pre function in models?
                     .find({user : req.params.id})
                     .populate('user')
                     .then(posts => {
@@ -94,7 +91,7 @@ router.post('/', (req, res) => {
         }
     };
 
-    //validate file uploaded
+    //validate file uploaded and change name of file
 
     User
         .findById(req.body.userId)
