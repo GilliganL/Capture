@@ -11,24 +11,28 @@
     <link rel='stylesheet' type='text/css' href='../style.css'>
 </head>
 <body>
-    <div class='nav-container'>
-        <h1>POSTCARD</h1>
-    </div>
-    <div class='post-bar'>
-        <h2>Upload a Postcard</h2>
+    <nav role='navigation' class='nav-container'>
+        <div class='nav-link' id='logo'><a href='/feed'><h1>POSTCARD</h1></a></div>
+        <div class='nav-links'>
+            <div class='nav-link' id='new-post'><h3>New Post</h3></div>
+            <div class='nav-link' id='people'><a href='/connections'><h3>People</h3></a></div>
+        </div>
+    </nav>
+    <main role='main'>
+        <div class='new-post-form hidden'>
+            <h2>Upload a Postcard</h2>
             <form id='post-form'>
-                <label for>Photo Upload</label>
-                <input type='file' id='postPhoto' placeholder='Choose a file'> 
-                <span id='loading' class='hidden'>Loading</span>   
+                <label for>New Photo</label>
+                <input type='file' id='postPhoto' placeholder='Choose a file'>   
                 <input type='hidden' id='save-url' name='save-url' value=''>
                 <label>Caption</label>
                 <input type='text' id='caption' name='caption' placeholder='Caption'><br>
                 <button type='submit' id='submitPost' value='New post'>Post</button>
             </form>
-    </div>
-   
-    <div class='feedSection flex-container'>
-    </div>
+        </div>
+        <div class='feedSection flex-container'></div>
+    </main>
+    <footer><p>Postcard Created by Lynsey Powell</p></footer>
     <script src="//code.jquery.com/jquery-3.1.1.min.js"
     integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
     crossorigin="anonymous"></script>

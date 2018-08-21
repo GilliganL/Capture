@@ -1,10 +1,14 @@
 
 (() => {
-    $('#postPhoto').on('change', event => { 
-        $('#loading').removeClass('hidden');
+    $('#postPhoto').on('change', event => {    
         const files = event.target.files;
         const file = files[0];
+        
+        // console.log(file);
+        
+        // file.name = uuidv1();
 
+        // console.log(file.name);
         //validate file type
         //change file name?
 
@@ -37,9 +41,7 @@ function uploadFile(file, signedRequest, url){
     xhr.onreadystatechange = () => {
         if(xhr.readyState === 4) {
             if(xhr.status === 200) {
-               $('#loading').addClass('hidden');
                 $('#save-url').val(url);
-                console.log($('#save-url').val());
             } else {
                 alert('Could not upload file');
             }

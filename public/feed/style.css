@@ -1,10 +1,6 @@
-.hidden {
-    display: none;
-}
-
 h1 {
-    text-align: center;
-    margin: 10px 0;
+    padding: 10px;
+    margin: 0;
 }
 
 h2 {
@@ -14,13 +10,57 @@ h2 {
     font-weight: lighter; 
 }
 
+h3 {
+    font-weight: lighter;
+}
+
+main {
+    margin-top: 70px;
+}
+
 .nav-container {
     display: flex;
+    position: fixed;
+    top: 0;
     background-color: #CEA097;
     align-items: center;
     justify-content: left;
     width: 100%;
-    padding: 5px 20px;
+    box-shadow: 3px 3px 5px #D9D9DA;
+}
+
+#logo {
+    flex-grow: 2;
+    text-align: left;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 2;
+}
+
+.nav-link {
+    flex-basis: 100px;
+    display: inline-block;
+    text-align: center;
+}
+
+.nav-link:hover {
+    background-color: #2E2E36;
+    color: #F6F8F9;
+}
+
+.nav-link a {
+    text-decoration: none;
+    color: #2E2E36;
+}
+
+#people a:hover, 
+#new-post:hover, 
+#logo a:hover {
+    background-color: #2E2E36;
+    color: #F6F8F9;
 }
 
 .post-bar {
@@ -40,18 +80,31 @@ h2 {
 #post-form label,
 #post-form input, 
 #post-form button {
-    width: 250px;
-    padding: 5px 10px;
+
     margin: 5px;
+    height: 36px;
+    border: 1px solid black;
+}
+
+#post-form input {
+    flex-grow: 2;
+    padding: 5px 10px;
+    text-align: left;
+}
+
+#post-form label {
+    flex-grow: 1;
+    padding: 8px 10px 5px 10px;
+    text-align: center;
+}
+
+#post-form button {
+    flex-grow: 2;
+    padding: 5px 10px;
     text-align: center;
 }
 
 .flex-container {
-    /* padding: 0;
-    margin: 0; */
-    /* -ms-box-orient: horizontal;
-    display: -webkit-box;
-    display: -moz-box; */
     display: -ms-flexbox;
     display: -moz-flex;
     display: -webkit-flex;
@@ -75,14 +128,18 @@ h2 {
     text-shadow: 2px 2px 5px black;
     background: linear-gradient(
         to right,
-        #EAE5EA 46%,
+        #F6F8F9 46%,
         #2A3B4C 46%,
         #2A3B4C 52%,
         #9EB4BD 52%,
-        #EAE5EA 56%
+        #F6F8F9 56%
     );
     flex-basis: 60px;
     display: flex;
+}
+
+#flex-item-date-0 {
+    margin-top: 5px;
 }
 
 .flex-item-content {
@@ -106,6 +163,15 @@ order: 1;
 .postImage {
     width: 80%;
     /*set max height of 500px while keeping aspect ratio*/
+}
+
+footer {
+    background-color: #9EB4BD;
+    padding: 10px;
+}
+
+footer p {
+    margin: 5px;
 }
 
 /* 640 px and above */
@@ -132,12 +198,4 @@ order: 1;
         flex-basis: 100px;
     }
 
-    #post-form label,
-    #post-form input, 
-    #post-form button {
-        width: 100px;
-        padding: 5px 10px;
-        margin: 5px;
-        text-align: center;
-    }
 }

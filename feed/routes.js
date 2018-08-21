@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const aws = require('aws-sdk');
+const uuid = require('uuid');
 
 const { User } = require('../users/models');
 const { FeedPost } = require('./models');

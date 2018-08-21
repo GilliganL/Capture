@@ -1,4 +1,12 @@
 
+function listenForNewPost() {
+    $('#new-post').on('click', event => {
+        event.preventDefault();
+        $('.new-post-form').toggleClass('hidden');
+    });
+}
+
+
 function listenForSubmitPost() {
     $('#post-form').on('submit', event => {
         event.preventDefault();
@@ -51,17 +59,28 @@ function displayFeedPosts(data) {
     data.reverse();
   
     for (index in data) {
-        if(index % 2 == 0){
-        $('.feedSection').append(
-            `<div class='postDiv flex-item'>
-                <div class='flex-item-hidden'></div>
-                <div class='flex-item-date'></div>
-                <div class='flex-item-content'>
-                <h3 class='poster'> ${data[index].user}</h3>
-                <p class='postCaption'>${data[index].caption}</p>
-                <a class='getById' href=# data-id="${data[index].userId}"><img class='postImage' src="${data[index].image}"></a>
-                </div>
-            </div>`);
+        if(index == 0) {
+            $('.feedSection').append(
+                `<div class='postDiv flex-item'>
+                    <div class='flex-item-hidden'></div>
+                    <div class='flex-item-date' id='flex-item-date-0'></div>
+                    <div class='flex-item-content'>
+                    <h3 class='poster'> ${data[index].user}</h3>
+                    <p class='postCaption'>${data[index].caption}</p>
+                    <a class='getById' href=# data-id="${data[index].userId}"><img class='postImage' src="${data[index].image}"></a>
+                    </div>
+                </div>`);
+        } else if(index % 2 == 0) {
+            $('.feedSection').append(
+                `<div class='postDiv flex-item'>
+                    <div class='flex-item-hidden'></div>
+                    <div class='flex-item-date'></div>
+                    <div class='flex-item-content'>
+                    <h3 class='poster'> ${data[index].user}</h3>
+                    <p class='postCaption'>${data[index].caption}</p>
+                    <a class='getById' href=# data-id="${data[index].userId}"><img class='postImage' src="${data[index].image}"></a>
+                    </div>
+                </div>`);
         } else {
             $('.feedSection').append(
                 `<div class='postDiv flex-item flex-item-flipped'>
@@ -110,6 +129,7 @@ function getAndDisplayFeedPosts() {
 }
 
 $(function() {
+    listenForNewPost();
     listenForSubmitPost();
     getAndDisplayFeedPosts();
     listenForGetById();
