@@ -2,9 +2,40 @@
 
 const express = require('express');
 const router = express.Router();
+const aws = require('aws-sdk');
 const validator = require('validator');
 
 const { User } = require('./models');
+
+const { S3_BUCKET } = require('../config');
+
+aws.config.region='us-east-1';
+
+router.get('/sign-s3', (req, res) => {
+    const s3 = new aws.S3();
+    const fileName = req.query['file-name'];
+    const fileType = req.query['file-type'];
+    const s3Params = {
+        Bucket: S3_BUCKET,
+        Key: `profile-images/${fileName}`,
+        Expires: 600,
+        ACL: 'public-read',
+        ContentType: fileType
+    };
+
+    s3.getSignedUrl('putObject', s3Params, (err, data) => {
+        if(err) {
+            console.log(err);
+            return res.end();
+        }
+        const returnData = {
+            signedRequest: data,
+            url: `https://${S3_BUCKET}.s3.amazonaws.com/feed-post-images/${fileName}`
+        };
+        res.write(JSON.stringify(returnData));
+        res.end();
+    });
+});
 
 //search users with query from URL - Separate GET route? or use query object here with if statement
 //Use get endpoint, $search { $search: req.query.name }
@@ -45,7 +76,7 @@ router.get('/:id', (req, res) => {
         .findById(req.params.id)
         //add error if user doesn't exist, or use line 23? Add if statement
         //use this only for editting own profile, remove serialize from here & test?
-        .then(user => res.status(201).json(user.serialize()))
+        .then(user => res.status(201).json(user))
         .catch(err => {
             console.error(err);
             res.status(500).json({error: 'something went wrong: get by ID'});
@@ -124,11 +155,12 @@ router.put('/:id', (req, res) => {
     const updated = {};
     const updateableFields = ['firstName', 'lastName', 'city', 'state', 'email'];
     updateableFields.forEach(field => {
+    //add check if value is empty
         if (field in req.body) {
             updated[field] = req.body[field];
         }
     });
-
+ 
     User   
         .findByIdAndUpdate(req.params.id, {$set: updated}, {new: true})
         .then(updatedUser => res.status(201).json(updatedUser))

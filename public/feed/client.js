@@ -15,7 +15,7 @@ function listenForSubmitPost() {
         let caption = $('#caption').val();
         let userId = '5b70ccf1393d310b26657bb2';
 
-        $('#postPhoto').val('');
+        $('#uploadPhoto').val('');
         $('#caption').val('');
 
         $.ajax({
@@ -60,7 +60,7 @@ function displayFeedPosts(data) {
   
     for (index in data) {
         if(index == 0) {
-            $('.feedSection').append(
+            $('.feed-section').append(
                 `<div class='postDiv flex-item'>
                     <div class='flex-item-hidden'></div>
                     <div class='flex-item-date' id='flex-item-date-0'></div>
@@ -71,7 +71,7 @@ function displayFeedPosts(data) {
                     </div>
                 </div>`);
         } else if(index % 2 == 0) {
-            $('.feedSection').append(
+            $('.feed-section').append(
                 `<div class='postDiv flex-item'>
                     <div class='flex-item-hidden'></div>
                     <div class='flex-item-date'></div>
@@ -82,7 +82,7 @@ function displayFeedPosts(data) {
                     </div>
                 </div>`);
         } else {
-            $('.feedSection').append(
+            $('.feed-section').append(
                 `<div class='postDiv flex-item flex-item-flipped'>
                     <div class='flex-item-hidden'></div>
                     <div class='flex-item-date'></div>
@@ -99,7 +99,9 @@ function displayFeedPosts(data) {
 
 function displayFeedPostsById(data) {
     //return array of same data listed above
+    //put in lightbox to display
     console.log(data);
+
 }
 
 function getFeedPostsById(id, callback) {
@@ -115,7 +117,7 @@ function getFeedPostsById(id, callback) {
 }
 
 function listenForGetById() {
-    $('.feedSection').on('click', 'a', function(event) {
+    $('.feed-section').on('click', 'a', function(event) {
         event.preventDefault();
         const userId = $(this).data('id');
 
@@ -124,7 +126,7 @@ function listenForGetById() {
 }
 
 function getAndDisplayFeedPosts() {
-    $('.feedSection').empty();
+    $('.feed-section').empty();
     getFeedPosts(displayFeedPosts);
 }
 

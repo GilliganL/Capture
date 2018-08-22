@@ -16,8 +16,8 @@ const userSchema = mongoose.Schema({
     },
     city: {type: String, required: true, index: true},
     state: {type: String, required: true, maxLength: 2, index: true},
-    email: {type: String, required: true}
-    //add profile picture
+    email: {type: String, required: true},
+    image: {type: String, required: true, default: './images/preview-avatar.png'}
 });
 
 userSchema.virtual('fullName').get(function() {
