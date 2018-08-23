@@ -80,7 +80,8 @@ main {
 /* move new-post to feed style? */
 #people a:hover, 
 #new-post:hover, 
-#logo a:hover {
+#logo a:hover,
+#feed a:hover {
     background-color: #2E2E36;
     color: #F6F8F9;
 }

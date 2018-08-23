@@ -34,7 +34,7 @@ function generateUserData() {
     return {
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
-        userName: faker.name.lastName(),
+        username: faker.name.lastName(),
         city: faker.address.city(),
         state: faker.address.stateAbbr(),
         email: faker.internet.email()
@@ -57,7 +57,7 @@ function generateFeedPostData() {
         user: {
             firstName: faker.name.firstName(),
             lastName: faker.name.lastName(),
-            userName: faker.internet.userName(),
+            username: faker.internet.username(),
             city: faker.address.city(),
             state: faker.address.stateAbbr(),
             email: faker.internet.email()
@@ -88,9 +88,9 @@ describe('Static assets', function() {
         });
     });
 
-    it('GET to /connections should return status 200 and html', function() {
+    it('GET to /people should return status 200 and html', function() {
         return chai.request(app)
-        .get('/connections')
+        .get('/people')
         .then(function(res) {
             expect(res).to.have.status(200);
             expect(res).to.be.html;
@@ -145,7 +145,7 @@ describe('User API resource', function() {
                     res.body.forEach(function(user) {
                         expect(user).to.be.a('object');
                         expect(user).to.include.keys(
-                            'id', 'fullName', 'userName', 'location');
+                            'id', 'fullName', 'username', 'location');
                     });
                     resUser = res.body[0];
                     return User.findById(resUser.id);
@@ -157,7 +157,7 @@ describe('User API resource', function() {
                     console.log('resUser is ' + resUser);
                     expect(resUser.id).to.equal(user.id.toString());
                     expect(resUser.fullName).to.equal(user.fullName);
-                    expect(resUser.userName).to.equal(user.userName);
+                    expect(resUser.username).to.equal(user.username);
                     expect(resUser.location).to.equal(user.location);
                 });
         });
@@ -188,7 +188,7 @@ describe('User API resource', function() {
                     expect(resUser.id).to.equal(user.id.toString());
                     expect(resUser.fullName).to.equal(user.fullName);
                     expect(resUser.location).to.equal(user.location);
-                    expect(resUser.userName).to.equal(user.userName);
+                    expect(resUser.username).to.equal(user.username);
                 });
         });
     });
@@ -205,9 +205,9 @@ describe('User API resource', function() {
                     expect(res).to.be.json;
                     expect(res.body).to.be.a('object');
                     expect(res.body).to.include.keys(
-                        'id', 'fullName', 'userName', 'location');
+                        'id', 'fullName', 'username', 'location');
                     expect(res.body.fullName).to.equal(`${newUser.firstName} ${newUser.lastName}`);
-                    expect(res.body.userName).to.equal(newUser.userName.toLowerCase());
+                    expect(res.body.username).to.equal(newUser.username.toLowerCase());
                     expect(res.body.location).to.equal(`${newUser.city}, ${newUser.state}`);
                     return User.findById(res.body.id);
                 })
@@ -215,7 +215,7 @@ describe('User API resource', function() {
                     console.log(user);
                     expect(user.firstName).to.equal(newUser.firstName);
                     expect(user.lastName).to.equal(newUser.lastName);
-                    expect(user.userName).to.equal(newUser.userName.toLowerCase());
+                    expect(user.username).to.equal(newUser.username.toLowerCase());
                     expect(user.city).to.equal(newUser.city);
                     expect(user.state).to.equal(newUser.state);
                     expect(user.email).to.equal(newUser.email);

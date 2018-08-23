@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const aws = require('aws-sdk');
-const uuid = require('uuid');
+//const passport = require('passport');
 
 const { User } = require('../users/models');
 const { FeedPost } = require('./models');
@@ -12,6 +12,10 @@ const { FeedPost } = require('./models');
 const { S3_BUCKET } = require('../config');
 
 aws.config.region='us-east-1';
+
+//const jwtAuth = passport.authenticate('jwt', { session: false });
+
+//router.use(jwtAuth);
 
 router.get('/sign-s3', (req, res) => {
     const s3 = new aws.S3();
@@ -43,6 +47,7 @@ router.get('/sign-s3', (req, res) => {
 router.get('/', (req, res) => {
     FeedPost
         .find()
+        .sort({ created: -1 })
         .populate('user')
         .then(posts => {
             res.status(200).json(posts.map(post => post.serialize()));
@@ -102,7 +107,8 @@ router.post('/', (req, res) => {
                     .findOneAndUpdate({_id: new mongoose.Types.ObjectId()}, {
                         user: req.body.userId,
                         image: req.body.image,
-                        caption: req.body.caption
+                        caption: req.body.caption,
+                        created: Date.now()
                     }, {upsert: true, new: true})
                     .populate('user')
                     .then(feedPost => res.status(201).json(feedPost.serialize()))

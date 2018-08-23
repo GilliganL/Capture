@@ -1,25 +1,24 @@
 
 //handle get user posts link
 
+//Submit edit profile form
 function listenForSubmitForm() {
     $('.edit-profile-form').on('submit', event => {
         event.preventDefault();
     //use user ID of logged in person for PUT
-    const id = '5b70ccf1393d310b26657bb2';
+    const id = '5b7e0857786ee64b3421637b';
     let image = $('#save-url').val();
     let firstName = $('#firstName').val();
     let lastName = $('#lastName').val();
     let city = $('#city').val();
     let state = $('#state').val();
     let email = $('#email').val();
-
-    //check for empty fields on backend
     
     $.ajax({
         url: `/api/users/${id}`,
         headers: {
             'content-type': 'application/json',
-            'authorization': 'bearer' + localStorage.token
+            'authorization': 'bearer ' + localStorage.authToken
         },
         data: JSON.stringify({
             id, image, firstName, lastName, city, state, email
@@ -30,6 +29,8 @@ function listenForSubmitForm() {
     })
 }
 
+
+//show edit profile form
 function listenForEditProfile() {
     $('.profile').on('click', 'button', function(event) {
         event.preventDefault();
@@ -42,7 +43,7 @@ function getProfile(id, callback) {
         url: `/api/users/${id}`,
         headers: {
             'content-type': 'application/json',
-            'authorization': 'bearer' + localStorage.token
+            'authorization': 'bearer ' + localStorage.authToken
         },
         type: 'GET'
     })
@@ -51,7 +52,7 @@ function getProfile(id, callback) {
 
 function displayProfile(data) {
     $('.profile').append(
-        `<img src='${data.image}'>
+        `<img class='profile-image' src='${data.image}'>
         <p>First Name: ${data.firstName}<br>
         Last Name: ${data.lastName}<br>
         City: ${data.city}<br>
@@ -65,7 +66,8 @@ function displayProfile(data) {
 function getAndDisplayProfile() {
     $('.profile').empty();
     //id of logged in user 
-    const userId = '5b70ccf1393d310b26657bb2';
+    console.log(localStorage);
+    const userId = '5b7e0857786ee64b3421637b';
     getProfile(userId, displayProfile);
 }
 
@@ -74,7 +76,7 @@ function getPeople(callback) {
         url: '/api/users',
         headers: {
             'content-type': 'application/json',
-            'authorization': 'bearer' + localStorage.token
+            'authorization': 'bearer ' + localStorage.authToken
         },
         type: 'GET'
     })
@@ -82,18 +84,18 @@ function getPeople(callback) {
 }
 
 function displayPeople(data) {
-    // fullName:"Lynsey Powell"
-    // id:"5b70b6842e1f2b53280b2374"
-    // location:"Denver, CO"
-    // userName:"lynsey"
-
     for (index in data) {
         $('.user-list').append(
-            `<li class='user-item'><a class='get-user-posts' href=# data-id="${data[index].id}"><img src='${data[index].image}'></a><br>
-            Username: ${data[index].userName}<br>
-            Name: ${data[index].fullName}<br>
-            Location: ${data[index].location}</li>`);
-         
+            `<li class='user-item'>
+                <div class='user-left'>
+                    <a class='get-user-posts' href=# data-id="${data[index].id}"><img src='${data[index].image}' alt='${data[index].fullName}'s picture' class='profile-image'></a>
+                </div>
+                <div class='user-right'>
+                    username: ${data[index].username}<br>
+                    Name: ${data[index].fullName}<br>
+                    Location: ${data[index].location}
+                </div>
+            </li>`);
     }
 }
 

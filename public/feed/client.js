@@ -13,7 +13,7 @@ function listenForSubmitPost() {
 
         let image = $('#save-url').val();
         let caption = $('#caption').val();
-        let userId = '5b70ccf1393d310b26657bb2';
+        let userId = '5b7e0986786ee64b34216382';
 
         $('#uploadPhoto').val('');
         $('#caption').val('');
@@ -22,7 +22,7 @@ function listenForSubmitPost() {
             url: '/api/feed/',
             headers: {
                 'content-type': 'application/json',
-                'authorization': 'bearer ' + localStorage.token
+                'authorization': 'bearer ' + localStorage.authToken
             },
             data: JSON.stringify({
                 image, userId, caption
@@ -41,7 +41,7 @@ function getFeedPosts(callback) {
         url: '/api/feed/',
         headers: {
             'content-type': 'application/json',
-            'authorization': 'bearer' + localStorage.token
+            'authorization': 'bearer ' + localStorage.authToken
         },
         type: 'GET'
     })
@@ -56,7 +56,6 @@ function displayFeedPosts(data) {
     //userId: "xxxxx",
     // image : "some image file"
     // user : "Lynsey Powell"
-    data.reverse();
   
     for (index in data) {
         if(index == 0) {
@@ -109,7 +108,7 @@ function getFeedPostsById(id, callback) {
         url: `/api/feed/${id}`,
         headers: {
             'content-type': 'application/json',
-            'authorization': 'bearer' + localStorage.token
+            'authorization': 'bearer ' + localStorage.authToken
         },
         type: 'GET'
     })

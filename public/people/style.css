@@ -3,3 +3,18 @@ li {
     padding: 10px;
     list-style: none;
 }
+
+.profile-image {
+    height: 100px;
+}
+
+.user-list {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.user-item {
+    display: flex;
+    flex-direction: row;
+}

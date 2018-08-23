@@ -6,12 +6,14 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
+const passport = require('passport');
 
 const { DATABASE_URL, PORT } = require('./config');
 
 const app = express();
 app.use(express.json());
 
+const { router: authRouter, localStrategy, jwtStrategy } = require('./auth'); 
 const userRoutes = require('./users/routes');
 const feedPostsRoutes = require('./feed/routes');
 
@@ -19,8 +21,16 @@ app.use(morgan('common'));
 
 app.use(express.static('public'));
 
-app.use('/api/users', userRoutes);
-app.use('/api/feed', feedPostsRoutes);
+passport.use(localStrategy);
+passport.use(jwtStrategy);
+
+const jwtAuth = passport.authenticate('jwt', { session: false });
+
+app.use('/api/users/', userRoutes);
+app.use('/api/feed', jwtAuth, feedPostsRoutes);
+app.use('/api/auth/', authRouter);
+
+
 
 app.use((req, res, next) => {
     res.sendStatus(404);
