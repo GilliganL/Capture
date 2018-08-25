@@ -1,0 +1,115 @@
+/* shared css */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #F6F8F9;
+    color: #2E2E36;
+    height: 100%;
+    line-height: 1.5em;
+}
+
+.hidden {
+    display: none;
+}
+
+main {
+    position: relative;
+    top: 75px;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+    margin: 0;
+    padding: 5px 10px;
+    font-weight: lighter; 
+}
+
+h3 {
+    font-weight: lighter;
+}
+
+.nav-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: fixed;
+    height: 75px;
+    width: 100%;
+    top: 0;
+    z-index: 1;
+    background-color: #CEA097;
+    box-shadow: 3px 3px 5px #D9D9DA;
+
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    max-width: 960px;
+    width: 100%;
+}
+
+.nav-link {
+    flex-basis: 100px;
+    display: inline-block;
+    text-align: center;
+}
+
+.nav-link a {
+    text-decoration: none;
+    color: #2E2E36;
+}
+
+#logo {
+    flex-grow: 2;
+}
+
+#feed, 
+#people,
+#new-post {
+    flex-grow: 1;
+}
+
+#people a:hover, 
+#new-post a:hover, 
+#logo a:hover,
+#feed a:hover {
+    color: #F6F8F9;
+}
+
+.profile-pic {
+    height: 100px;
+    border-radius: 50%;
+}
+
+footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: fixed;    
+    bottom: 0;
+    width: 100%;
+    z-index: 1;
+    padding: 5px;
+    background-color: #9EB4BD;
+}
+
+.footer-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: 960px;
+    width: 100%;
+}
+
+footer p {
+    margin: 5px;
+}
