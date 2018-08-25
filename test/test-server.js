@@ -7,9 +7,8 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe('server.js', function() {
-    it('should return status 200 and html', function() {
-
+describe('test server.js', function() {
+    it('get to / should return status 200 and html', function() {
         return chai.request(app)
             .get('/')
             .then(function(res) {
@@ -17,6 +16,26 @@ describe('server.js', function() {
                 expect(res).to.be.html;
             });
     });
+
+    it('get to /feed should return status 200 and html', function() {
+        return chai.request(app)
+        .get('/feed')
+        .then(function(res) {
+            expect(res).to.have.status(200);
+            expect(res).to.be.html;
+        });
+    });
+
+    it('get to /connections should return status 200 and html', function() {
+        return chai.request(app)
+        .get('/connections')
+        .then(function(res) {
+            expect(res).to.have.status(200);
+            expect(res).to.be.html;
+        });
+    });
 });
+
+
 
 
