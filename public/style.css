@@ -7,7 +7,8 @@
 body {
     background-color: #F6F8F9;
     color: #2E2E36;
-
+    height: 100%;
+    line-height: 1.5em;
 }
 
 .hidden {
@@ -15,13 +16,12 @@ body {
 }
 
 main {
-    margin-left: 30px;
-    margin-right: 30px;
+    position: relative;
+    top: 75px;
 }
 
 h1 {
-    padding: 10px;
-    margin: 0;
+    text-align: center;
 }
 
 h2 {
@@ -35,30 +35,26 @@ h3 {
     font-weight: lighter;
 }
 
-main {
-    margin-top: 70px;
+.nav-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: fixed;
+    height: 75px;
+    width: 100%;
+    top: 0;
+    z-index: 1;
+    background-color: #CEA097;
+    box-shadow: 3px 3px 5px #D9D9DA;
+
 }
 
 .nav-container {
     display: flex;
-    position: fixed;
-    top: 0;
-    background-color: #CEA097;
     align-items: center;
-    justify-content: left;
+    justify-content: space-evenly;
+    max-width: 960px;
     width: 100%;
-    box-shadow: 3px 3px 5px #D9D9DA;
-}
-
-#logo {
-    flex-grow: 2;
-    text-align: left;
-}
-
-.nav-links {
-    display: flex;
-    justify-content: flex-end;
-    flex-grow: 2;
 }
 
 .nav-link {
@@ -67,28 +63,51 @@ main {
     text-align: center;
 }
 
-.nav-link:hover {
-    background-color: #2E2E36;
-    color: #F6F8F9;
-}
-
 .nav-link a {
     text-decoration: none;
     color: #2E2E36;
 }
 
-/* move new-post to feed style? */
+#logo {
+    flex-grow: 2;
+}
+
+#feed, 
+#people,
+#new-post {
+    flex-grow: 1;
+}
+
 #people a:hover, 
-#new-post:hover, 
+#new-post a:hover, 
 #logo a:hover,
 #feed a:hover {
-    background-color: #2E2E36;
     color: #F6F8F9;
 }
 
+.profile-pic {
+    height: 100px;
+    border-radius: 50%;
+}
+
 footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: fixed;    
+    bottom: 0;
+    width: 100%;
+    z-index: 1;
+    padding: 5px;
     background-color: #9EB4BD;
-    padding: 10px;
+}
+
+.footer-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: 960px;
+    width: 100%;
 }
 
 footer p {

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta name='description' content='A social media site'>
     <meta charset="UTF-8">
@@ -10,55 +11,66 @@
     <link rel='stylesheet' type='text/css' href='style.css'>
     <link rel='stylesheet' type='text/css' href='../style.css'>
 </head>
+
 <body>
-    <nav role='navigation' class='nav-container'>
-        <div class='nav-link' id='logo'><a href='/feed'><h1>POSTCARD</h1></a></div>
-        <div class='nav-links'>
-            <div class='nav-link' id='feed'><a href='/feed'><h3>Feed</h3></a></div>
-            <div class='nav-link' id='people'><a href='/people'><h3>People</h3></a></div>
+    <nav role='navigation' class='nav-bar'>
+        <div class='nav-container'>
+            <div class='nav-link' id='feed'>
+                <a href='/feed'>
+                    <h3>Timeline</h3>
+                </a>
+            </div>
+            <div class='nav-link' id='logo'>
+                <a href='/feed'>
+                    <h1>POSTCARD</h1>
+                </a>
+            </div>
+            <div class='nav-link' id='people'>
+                <a href='/people'>
+                    <h3>People</h3>
+                </a>
+            </div>
         </div>
     </nav>
     <main role='main'>
-        <h1>People</h1>
         <section class='profile'>
+            <div class='profile-container'></div>
         </section>
-        <section class='edit-profile-form profile-container hidden'>
-            <h2>Edit Your Profile</h2>
-            <form id='post-form'>
-                <label for='uploadPhoto'>Profile Picture</label>
-                <input type='file' id='uploadPhoto' placeholder='Choose a file'><br>   
-                <input type='hidden' id='save-url' name='save-url' value=''>
-                <label for='firstName'>First Name</label>
-                <input type='text' id='firstName' name='caption' placeholder='First Name'><br>
-                <label for='LastName'>Last Name</label>
-                <input type='text' id='lastName' name='caption' placeholder='Last Name'><br>
-                <label for='city'>City</label>
-                <input type='text' id='city' name='caption' placeholder='City'><br>
-                <label for='state'>State</label>
-                <input type='text' id='state' name='caption' placeholder='State'><br>
-                <label for='email'>Email</label>
-                <input type='text' id='email' name='caption' placeholder='Email'><br>
-                <button type='submit' id='submitPost' value='New post'>Submit</button>
-            </form>
+        <section class='edit-profile hidden'>
+            <div class='edit-profile-container'>
+            <h3>Edit Your Profile</h3>
+                <form id='edit-profile-form'>
+                    <label for='uploadPhoto'>Profile Picture</label>
+                    <input type='file' id='uploadPhoto' placeholder='Choose a file'>
+                    <input type='hidden' id='save-url' name='save-url' value=''>
+                    <label for='firstName'>First Name</label>
+                    <input type='text' id='firstName' name='caption' placeholder='First Name'>
+                    <label for='LastName'>Last Name</label>
+                    <input type='text' id='lastName' name='caption' placeholder='Last Name'>
+                    <label for='city'>City</label>
+                    <input type='text' id='city' name='caption' placeholder='City'>
+                    <label for='state'>State</label>
+                    <input type='text' id='state' name='caption' placeholder='State'>
+                    <label for='email'>Email</label>
+                    <input type='text' id='email' name='caption' placeholder='Email'>
+                    <button type='submit' id='submitPost' value='New post'>Submit</button>
+                </form>
+            </div>
         </section>
-
-    <!-- <form id="searchForm">
-        <input type="text" id="searchTerm">
-        <button type="submit" id="searchButton">Find New people</button>
-    </form> -->
-    
-        <section class='list-section list-container'>
-            <ul class='user-list'>
-                <li class='list-item'>Users</li>
-            </ul>
+        <section class='list-section'>
+            <h2>People</h2>
+            <ul class='list-container'></ul>
         </section>
     </main>
-    <footer><p>Postcard Created by Lynsey Powell</p></footer>
-    <script src="//code.jquery.com/jquery-3.1.1.min.js"
-    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-    crossorigin="anonymous"></script>
+    <footer>
+        <div class='footer-container'>
+            <p>Postcard Created by Lynsey Powell</p>
+        </div>
+    </footer>
+    <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript" src="client.js"></script>
     <script type="text/javascript" src="../upload.js"></script>
 </body>
+
 </html>

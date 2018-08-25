@@ -32,9 +32,9 @@ function listenForSubmitForm() {
 
 //show edit profile form
 function listenForEditProfile() {
-    $('.profile').on('click', 'button', function(event) {
+    $('.profile-container').on('click', 'button', function(event) {
         event.preventDefault();
-        $('.edit-profile-form').removeClass('hidden');    
+        $('.edit-profile').removeClass('hidden');    
     });
 }
 
@@ -51,20 +51,24 @@ function getProfile(id, callback) {
 }
 
 function displayProfile(data) {
-    $('.profile').append(
-        `<img class='profile-image' src='${data.image}'>
-        <p>First Name: ${data.firstName}<br>
-        Last Name: ${data.lastName}<br>
-        City: ${data.city}<br>
-        State: ${data.state}<br>
-        Email: ${data.email}<br>
-        <button data-id='${data._id}'>Edit Profile</button>
-        </p>`
+    $('.profile-container').append(
+        `<div class='profile-image'>
+            <img class='profile-pic' src='${data.image}'>
+        </div>
+        <div class='profile-data'>
+            <p>First Name: ${data.firstName}<br>
+            Last Name: ${data.lastName}<br>
+            City: ${data.city}<br>
+            State: ${data.state}<br>
+            Email: ${data.email}<br>
+            </p>
+            <button id='profile-button' data-id='${data._id}'>Edit Profile</button>
+        </div>`
     );
 }
 
 function getAndDisplayProfile() {
-    $('.profile').empty();
+    $('.profile-container').empty();
     //id of logged in user 
     console.log(localStorage);
     const userId = '5b7e0857786ee64b3421637b';
@@ -85,22 +89,20 @@ function getPeople(callback) {
 
 function displayPeople(data) {
     for (index in data) {
-        $('.user-list').append(
-            `<li class='user-item'>
-                <div class='user-left'>
-                    <a class='get-user-posts' href=# data-id="${data[index].id}"><img src='${data[index].image}' alt='${data[index].fullName}'s picture' class='profile-image'></a>
+        $('.list-container').append(
+            `<li class='list-item'>
+                <div class='item-left'>
+                    <a class='get-user-posts' href=# data-id="${data[index].id}"><img src='${data[index].image}' alt='${data[index].fullName}'s picture' class='profile-pic'></a>
                 </div>
-                <div class='user-right'>
-                    username: ${data[index].username}<br>
-                    Name: ${data[index].fullName}<br>
-                    Location: ${data[index].location}
+                <div class='item-right'>
+                    Username: ${data[index].username}<br>Name: ${data[index].fullName}<br>Location: ${data[index].location}
                 </div>
             </li>`);
     }
 }
 
 function getAndDisplayPeople() {
-    $('.user-list').empty();
+    $('.list-container').empty();
     getPeople(displayPeople);
 }
 
