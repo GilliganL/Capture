@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Postcard People</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700" rel="stylesheet">
     <link rel='stylesheet' type='text/css' href='style.css'>
     <link rel='stylesheet' type='text/css' href='../style.css'>
 </head>
@@ -22,7 +23,7 @@
             </div>
             <div class='nav-link' id='logo'>
                 <a href='/feed'>
-                    <h1>POSTCARD</h1>
+                    <h1>Postcard</h1>
                 </a>
             </div>
             <div class='nav-link' id='people'>
@@ -33,40 +34,58 @@
         </div>
     </nav>
     <main role='main'>
+        <hr>
         <section class='profile'>
             <div class='profile-container'></div>
         </section>
-        <section class='edit-profile hidden'>
-            <div class='edit-profile-container'>
-            <h3>Edit Your Profile</h3>
-                <form id='edit-profile-form'>
-                    <label for='uploadPhoto'>Profile Picture</label>
-                    <input type='file' id='uploadPhoto' placeholder='Choose a file'>
-                    <input type='hidden' id='save-url' name='save-url' value=''>
-                    <label for='firstName'>First Name</label>
-                    <input type='text' id='firstName' name='caption' placeholder='First Name'>
-                    <label for='LastName'>Last Name</label>
-                    <input type='text' id='lastName' name='caption' placeholder='Last Name'>
-                    <label for='city'>City</label>
-                    <input type='text' id='city' name='caption' placeholder='City'>
-                    <label for='state'>State</label>
-                    <input type='text' id='state' name='caption' placeholder='State'>
-                    <label for='email'>Email</label>
-                    <input type='text' id='email' name='caption' placeholder='Email'>
-                    <button type='submit' id='submitPost' value='New post'>Submit</button>
+        <section class='edit-profile-section hidden'>
+            <!-- <div class='edit-profile-section-container'> -->
+                <form class='profile-form'>
+                    <ul class='form-wrapper'>
+                        <li class='form-row'>
+                            <label for='uploadPhoto'>Profile Picture</label>
+                            <input type='file' class='input-file' id='uploadPhoto' placeholder='Choose a file'>
+                            <input type='hidden' id='save-url' name='save-url' value=''>
+                        </li>
+                        <li class='form-row'>
+                            <label for='firstName'>First Name</label>
+                            <input type='text' id='firstName' name='caption' placeholder='First Name'>
+                        </li>
+                        <li class='form-row'>
+                            <label for='LastName'>Last Name</label>
+                            <input type='text' id='lastName' name='caption' placeholder='Last Name'>
+                        </li>
+                        <li class='form-row'>
+                            <label for='city'>City</label>
+                            <input type='text' id='city' name='caption' placeholder='City'>
+                        </li>
+                        <li class='form-row'>
+                            <label for='state'>State</label>
+                            <input type='text' id='state' name='caption' placeholder='State'>
+                        </li>
+                        <li class='form-row'>
+                            <label for='email'>Email</label>
+                            <input type='text' id='email' name='caption' placeholder='Email'>
+                        </li>
+                        <li class='form-row'>
+                            <button type='submit' id='submitPost' value='New post'>Submit</button>
+                        </li>
+                    </ul>
                 </form>
-            </div>
+            <!-- </div> -->
         </section>
+        <hr>
+        <h2>People</h2>
         <section class='list-section'>
-            <h2>People</h2>
-            <ul class='list-container'></ul>
+            <ul class='user-wrapper list-container'></ul>
         </section>
+        <hr>
     </main>
-    <footer>
+    <!-- <footer>
         <div class='footer-container'>
             <p>Postcard Created by Lynsey Powell</p>
         </div>
-    </footer>
+    </footer> -->
     <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript" src="client.js"></script>

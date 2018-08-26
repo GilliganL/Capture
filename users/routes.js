@@ -109,8 +109,6 @@ router.get('/sign-s3', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-
-// exclude signed in user
     User
         .find()
         .then(users => {
@@ -125,9 +123,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     User
         .findById(req.params.id)
-        //add error if user doesn't exist, or use line 23? Add if statement
-        //use this only for editting own profile, remove serialize from here & test?
-        .then(user => res.status(201).json(user))
+        .then(user => res.status(201).json(user.serialize()))
         .catch(err => {
             console.error(err);
             res.status(500).json({ error: 'something went wrong: get by ID' });
@@ -142,13 +138,12 @@ router.put('/:id', (req, res) => {
             error: 'Request path ID and request body ID must match'
         });
     }
-
+   
     const updated = {};
     const updateableFields = ['firstName', 'lastName', 'city', 'state', 'email'];
     updateableFields.forEach(field => {
     
-        //check for empty key values
-        if (field in req.body) {
+        if (field in req.body && !(!req.body[field])) {
             updated[field] = req.body[field];
         }
     });
@@ -175,26 +170,3 @@ router.delete('/:id', (req, res) => {
 });
 
 module.exports = router;
-
-
-//search users with query from URL - Separate GET route? or use query object here with if statement
-//Use get endpoint, $search { $search: req.query.name }
-// { name: `*${req.query.name}*` }
-// {
-//     name: {
-//       $regex: `${req.query.name}`,
-//       $options: 'i'
-//     }
-//   } 
-// $or: [
-//     {
-//       name: {
-//         $regex: `${req.query.name}`,
-//         $options: 'i'
-//       }
-//     },     {
-//       name: {
-//         $regex: `${req.query.name}`,
-//         $options: 'i'
-//       }
-//     }, ] 

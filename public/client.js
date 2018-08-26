@@ -24,7 +24,8 @@ function login(username, password) {
             method: 'post'
         })
         .done((token) => {
-            localStorage.authToken = token.authToken
+            localStorage.authToken = token.authToken;
+            localStorage.id = token.id;
             window.location = '/feed';
         });
 }
