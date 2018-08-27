@@ -37,7 +37,7 @@ app.use((req, res, next) => {
     next();
 })
 
-app.use((req, res, next, error) => {
+app.use((error, req, res, next) => {
     console.error(error);
     res.status(500).json(error);
     next();

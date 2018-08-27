@@ -4,7 +4,6 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const aws = require('aws-sdk');
-//const passport = require('passport');
 
 const { User } = require('../users/models');
 const { FeedPost } = require('./models');
@@ -12,10 +11,6 @@ const { FeedPost } = require('./models');
 const { S3_BUCKET } = require('../config');
 
 aws.config.region='us-east-1';
-
-//const jwtAuth = passport.authenticate('jwt', { session: false });
-
-//router.use(jwtAuth);
 
 router.get('/sign-s3', (req, res) => {
     const s3 = new aws.S3();
@@ -97,30 +92,33 @@ router.post('/', (req, res) => {
         }
     };
 
+    const now = new Date();
     //validate file uploaded and change name of file
+    const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate()); 
 
-    User
-        .findById(req.body.userId)
-        .then(user => {
-            if(user) {
-                FeedPost   
+    FeedPost
+        .findOne({
+            user: req.user.id,
+            created: { $gte: startOfToday }
+        })
+        .then(post => {
+            console.log(req.body.image);
+            if(post) {
+                res.status(400).json({error: 'Already posted today'});
+                return 
+            }
+            return FeedPost   
                     .findOneAndUpdate({_id: new mongoose.Types.ObjectId()}, {
-                        user: req.body.userId,
+                        user: req.user.id,
                         image: req.body.image,
                         caption: req.body.caption,
                         created: Date.now()
                     }, {upsert: true, new: true})
                     .populate('user')
-                    .then(feedPost => res.status(201).json(feedPost.serialize()))
-                    .catch(err => {
-            //get this error when user not found instead of line 117
-                        console.error(err);
-                        res.status(500).json({ error: 'Something went wrong: POST FeedPost'});
-                    });
-            } else {
-                const message = 'User not found';
-                console.error(message);
-                return res.status(400).send(message);
+        })
+        .then(feedPost => {
+            if(feedPost) {
+            res.status(201).json(feedPost.serialize())
             }
         })
         .catch(err => {

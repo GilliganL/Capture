@@ -1,40 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Public HTML file</h1>
-    <form id='loginForm'>
-        <input type='text' id='usernameLogin' required>
-        <input type='password' id='passwordLogin' required>
-        <button type='submit' id='loginButton'>Login</button>
-    </form>
-    <form id="signUpForm">
-            <label for='firstName'>First Name</label>
-            <input type='text' id='firstName' required>
-            <label for='lastName'>Last Name</label>
-            <input type='text' id='lastName' required>
-            <label for='username'>Username</label>
-            <input type='text' id='username' required>
-            <label for='city'>City</label>
-            <input type='text' id='city' required>
-            <label for='state'>State</label>
-            <input type='text' id='state' required>
-            <label for='email'>Email</label>
-            <input type='text' id='email' required>
-            <label for='password'>Password</label>
-            <input type='password' id='password' required>
-            <button type='submit' id='signUpButton'>Sign Up</button>
-    </form>
 
-    <script src="//code.jquery.com/jquery-3.1.1.min.js"
-    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-    crossorigin="anonymous"></script>
+<head>
+    <meta name='description' content='A social media site'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Postcard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700" rel="stylesheet">
+    <link rel='stylesheet' type='text/css' href='style.css'>
+</head>
+
+<body>
+    <nav role='navigation' class='nav-bar'>
+        <div class='nav-container'>
+            <div class='nav-link' id='logo'>
+                <h1>Postcard</h1>
+            </div>
+            <div class='logout-container'>
+                <button id='logout-button'>Logout</button>
+            </div>
+        </div>
+    </nav>
+    <hr>
+    <main role='main'>
+        <div class='forms-container'>
+            <section class='login-form-section'>
+                <fieldset>
+                    <legend>Login</legend>
+                    <form id='login-form'>
+                        <ul class='form-wrapper'>
+                            <li class='form-row'>
+                                <label for='login-username'>Username</label>
+                                <input type='text' id='login-username' required>
+                            </li>
+                            <li class='form-row'>
+                                <label for='login-password'>Password</label>
+                                <input type='password' id='login-password' required>
+                            </li>
+                            <li class='form-row'>
+                                <button type='submit' id='login-button'>Login</button>
+                            </li>
+                        </ul>
+                    </form>
+                </fieldset>
+            </section>
+            <section class='signup-form-section'>
+                <fieldset>
+                    <legend>Sign Up</legend>
+                    <form id='sign-up-form'>
+                        <ul class='form-wrapper'>
+                            <li class='form-row'>
+                                <label for='firstName'>First Name</label>
+                                <input type='text' id='firstName' required>
+                            </li>
+                            <li class='form-row'>
+                                <label for='lastName'>Last Name</label>
+                                <input type='text' id='lastName' required>
+                            </li>
+                            <li class='form-row'>
+                                <label for='username'>Username</label>
+                                <input type='text' id='username' required>
+                            </li>
+                            <li class='form-row'>
+                                <label for='city'>City</label>
+                                <input type='text' id='city' required>
+                            </li>
+                            <li class='form-row'>
+                                <label for='state'>State</label>
+                                <input type='text' id='state' required>
+                            </li>
+                            <li class='form-row'>
+                                <label for='email'>Email</label>
+                                <input type='text' id='email' required>
+                            </li>
+                            <li class='form-row'>
+                                <label for='password'>Password</label>
+                                <input type='password' id='password' required>
+                            </li>
+                            <li class='form-row'>
+                                <button type='submit' id='signUpButton'>Sign Up</button>
+                            </li>
+                        </ul>
+                    </form>
+                </fieldset>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <div class='footer-container'>
+            <p>Postcard Created by Lynsey Powell</p>
+        </div>
+    </footer>
+
+    <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript" src="client.js"></script>
 </body>
+
 </html>

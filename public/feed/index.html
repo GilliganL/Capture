@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta name='description' content='A social media site'>
     <meta charset="UTF-8">
@@ -10,12 +11,26 @@
     <link rel='stylesheet' type='text/css' href='style.css'>
     <link rel='stylesheet' type='text/css' href='../style.css'>
 </head>
+
 <body>
     <nav role='navigation' class='nav-bar'>
         <div class='nav-container'>
-            <div class='nav-link' id='new-post'><h3>New Post</h3></div>
-            <div class='nav-link' id='logo'><a href='/feed'><h1>POSTCARD</h1></a></div>
-            <div class='nav-link' id='people'><a href='/people'><h3>People</h3></a></div>
+            <div class='nav-link' id='new-post'>
+                <h3>New Post</h3>
+            </div>
+            <div class='nav-link' id='logo'>
+                <a href='/feed'>
+                    <h1>POSTCARD</h1>
+                </a>
+            </div>
+            <div class='nav-link' id='people'>
+                <a href='/people'>
+                    <h3>People</h3>
+                </a>
+            </div>
+            <div class='logout-container'>
+                <button id='logout-button'>Logout</button>
+            </div>
         </div>
     </nav>
     <main role='main'>
@@ -23,7 +38,7 @@
             <h2>Upload a Postcard</h2>
             <form id='post-form'>
                 <label for='#uploadPhoto'>New Photo</label>
-                <input type='file' id='uploadPhoto' placeholder='Choose a file'>   
+                <input type='file' id='uploadPhoto' placeholder='Choose a file'>
                 <input type='hidden' id='save-url' name='save-url' value=''>
                 <label for='#caption'>Caption</label>
                 <input type='text' id='caption' name='caption' placeholder='Caption'><br>
@@ -32,12 +47,13 @@
         </div>
         <div class='feed-section flex-container'></div>
     </main>
-    <footer><p>Postcard Created by Lynsey Powell</p></footer>
-    <script src="//code.jquery.com/jquery-3.1.1.min.js"
-    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-    crossorigin="anonymous"></script>
+    <footer>
+        <p>Postcard Created by Lynsey Powell</p>
+    </footer>
+    <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript" src="client.js"></script>
     <script type="text/javascript" src="../upload.js"></script>
 </body>
+
 </html>

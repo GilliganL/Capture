@@ -21,7 +21,7 @@
 
 function getSignedRequest(file) {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', `/api/feed/sign-s3?file-name=${file.name}&file-type=${file.type}`);
+    xhr.open('GET', `/api/feed/sign-s3?file-name=${encodeURIComponent(file.name)}&file-type=${encodeURIComponent(file.type)}`);
     xhr.setRequestHeader('authorization', 'bearer ' + localStorage.authToken);
     xhr.onreadystatechange = () => {
         if(xhr.readyState === 4){

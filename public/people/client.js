@@ -1,12 +1,11 @@
 
-//handle get user posts link
+//handle get user posts on click on profile pick
 
-//Submit edit profile form
+
 function listenForSubmitForm() {
     $('.profile-form').on('submit', event => {
         event.preventDefault();
 
-        let id = localStorage.id;
         let image = $('#save-url').val();
         let firstName = $('#firstName').val().trim();
         let lastName = $('#lastName').val().trim();
@@ -15,50 +14,55 @@ function listenForSubmitForm() {
         let email = $('#email').val().trim();
 
         $.ajax({
-            url: `/api/users/${localStorage.id}`,
+            url: `/api/users/myuser`,
             headers: {
                 'content-type': 'application/json',
                 'authorization': 'bearer ' + localStorage.authToken
             },
             data: JSON.stringify({
-                id, image, firstName, lastName, city, state, email
+                image, firstName, lastName, city, state, email
             }),
-            type: 'PUT'
-        })
-        .done(() => getAndDisplayProfile());
-        })
+            type: 'PUT',
+            success: (() => getAndDisplayProfile()),
+            error: (res) => {
+                alert(res.responseText);
+            }
+        });
+    });
 }
 
-//show edit profile form
 function listenForEditProfile() {
-    $('.profile-container').on('click', 'button', function(event) {
+    $('.profile-container').on('click', 'button', function (event) {
         event.preventDefault();
-        $('.edit-profile-section').toggleClass('hidden');  
-        
+        $('.edit-profile-section').toggleClass('hidden');
+
         if ($('.edit-profile-section').hasClass('hidden')) {
             $(this).html('Edit Profile');
-            } else {
-                $(this).html('Close');
-            }
+        } else {
+            $(this).html('Close');
+        }
     });
 }
 
 function getProfile(callback) {
     $.ajax({
-        url: `/api/users/${localStorage.id}`,
+        url: `/api/users/myuser`,
         headers: {
             'content-type': 'application/json',
             'authorization': 'bearer ' + localStorage.authToken
         },
-        type: 'GET'
-    })
-    .done((data) => callback(data));
+        type: 'GET',
+        success: (data) => callback(data),
+        error: (res) => {
+            alert(res.responseText);
+        }
+    });
 }
 
 function displayProfile(data) {
     if ($('.edit-profile-section').hasClass('hidden')) {
-    $('.profile-container').append(
-        `<div class='profile-image'>
+        $('.profile-container').append(
+            `<div class='profile-image'>
             <img class='profile-pic' src='${data.image}'>
         </div>
         <div class='profile-data'>
@@ -67,7 +71,8 @@ function displayProfile(data) {
             <p><span class='field-label'>City: </span> ${data.location}</p>
             <button id='profile-button' data-id='${data._id}'>Edit Profile</button>
         </div>`
-    ); } else {
+        );
+    } else {
         $('.profile-container').append(
             `<div class='profile-image'>
                 <img class='profile-pic' src='${data.image}'>
@@ -78,7 +83,8 @@ function displayProfile(data) {
                 <p><span class='field-label'>City: </span> ${data.location}</p>
                 <button id='profile-button' data-id='${data._id}'>Close</button>
             </div>`
-        )};
+        )
+    };
 }
 
 function getAndDisplayProfile() {
@@ -93,14 +99,16 @@ function getPeople(callback) {
             'content-type': 'application/json',
             'authorization': 'bearer ' + localStorage.authToken
         },
-        type: 'GET'
-    })
-    .done((data) => callback(data));
+        type: 'GET',
+        success: (data) => callback(data),
+        error: (res) => {
+            alert(res.responseText);
+        }
+    });
 }
 
 function displayPeople(data) {
     for (index in data) {
-        if(data[index].id !== localStorage.id) {
             $('.list-container').append(
                 `<li class='user-row'>
                     <div class='user-left'>
@@ -112,7 +120,6 @@ function displayPeople(data) {
                         <p><span class='field-label'>Location:</span> ${data[index].location}</p>
                     </div>
                 </li>`);
-        }
     }
 }
 
@@ -121,7 +128,7 @@ function getAndDisplayPeople() {
     getPeople(displayPeople);
 }
 
-$(function() {
+$(function () {
     getAndDisplayPeople();
     getAndDisplayProfile();
     listenForEditProfile();

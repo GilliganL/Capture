@@ -1,46 +1,72 @@
 
-//function to get values from form and redirect to feed
-
 function listenForLogin() {
-    $('#loginForm').on('submit', event => {
+    $('#login-form').on('submit', event => {
         event.preventDefault();
-        let username = $('#usernameLogin').val();
-        let password = $('#passwordLogin').val();
+ 
+        let username = $('#login-username').val().trim();
+        let password = $('#login-password').val().trim();
 
         login(username, password);
    
     });
 }
+
 function login(username, password) {
 
         $.ajax({
             url: '/api/auth/login',
             headers: {
-                'content-type': 'application/json',
+                'content-type': 'application/json'
             },
             data: JSON.stringify({
                 username, password
             }),
-            method: 'post'
-        })
-        .done((token) => {
-            localStorage.authToken = token.authToken;
-            localStorage.id = token.id;
-            window.location = '/feed';
+            method: 'post',
+            success: ((token) => {
+                localStorage.authToken = token.authToken;
+                localStorage.id = token.id;
+                window.location = '/feed';
+            }),
+            error: (res) => {
+                alert(res.responseText);
+            }
         });
 }
 
+function listenForLogoutButton() {
+    $('.logout-container').on('click', 'button', function(event) {
+        event.preventDefault();
+        
+        $.ajax({
+            url: '/api/auth/logout',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': 'bearer ' + localStorage.authToken
+            },
+            type: 'GET',
+            success: () => {
+                delete localStorage.authToken;
+                delete localStorage.id;
+                window.location = '/';
+            },
+            error: (res) => {
+                alert:(res.responseText);
+            }
+        });
+    });
+}
+
 function listenForSignUpButton() {
-    $('#signUpForm').on('submit', event => {
+    $('#sign-up-form').on('submit', event => {
         event.preventDefault();
 
-        let firstName = $('#firstName').val();
-        let lastName = $('#lastName').val();
-        let username = $('#username').val();
-        let password = $('#password').val();
-        let city = $('#city').val();
-        let state = $('#state').val();
-        let email = $('#email').val();
+        let firstName = $('#firstName').val().trim();
+        let lastName = $('#lastName').val().trim();
+        let username = $('#username').val().trim();
+        let password = $('#password').val().trim();
+        let city = $('#city').val().trim();
+        let state = $('#state').val().trim();
+        let email = $('#email').val().trim();
 
         $.ajax({
             url: '/api/users',
@@ -60,4 +86,5 @@ function listenForSignUpButton() {
 $(function() {
     listenForLogin();
     listenForSignUpButton();
+    listenForLogoutButton();
 })

@@ -35,6 +35,8 @@ feedPostSchema.pre('findById', function(next) {
     next();
 });
 
+feedPostSchema.pre('')
+
 const FeedPost = mongoose.model('FeedPost', feedPostSchema);
 
 module.exports = { FeedPost };

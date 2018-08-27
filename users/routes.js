@@ -81,36 +81,36 @@ router.post('/', (req, res) => {
 
 router.use(jwtAuth);
 
-router.get('/sign-s3', (req, res) => {
+// router.get('/sign-s3', (req, res) => {
 
-    const s3 = new aws.S3();
-    const fileName = req.query['file-name'];
-    const fileType = req.query['file-type'];
-    const s3Params = {
-        Bucket: S3_BUCKET,
-        Key: `profile-images/${fileName}`,
-        Expires: 600,
-        ACL: 'public-read',
-        ContentType: fileType
-    };
+//     const s3 = new aws.S3();
+//     const fileName = req.query['file-name'];
+//     const fileType = req.query['file-type'];
+//     const s3Params = {
+//         Bucket: S3_BUCKET,
+//         Key: `profile-images/${fileName}`,
+//         Expires: 600,
+//         ACL: 'public-read',
+//         ContentType: fileType
+//     };
 
-    s3.getSignedUrl('putObject', s3Params, (err, data) => {
-        if (err) {
-            console.log(err);
-            return res.end();
-        }
-        const returnData = {
-            signedRequest: data,
-            url: `https://${S3_BUCKET}.s3.amazonaws.com/feed-post-images/${fileName}`
-        };
-        res.write(JSON.stringify(returnData));
-        res.end();
-    });
-});
+//     s3.getSignedUrl('putObject', s3Params, (err, data) => {
+//         if (err) {
+//             console.log(err);
+//             return res.end();
+//         }
+//         const returnData = {
+//             signedRequest: data,
+//             url: `https://${S3_BUCKET}.s3.amazonaws.com/feed-post-images/${fileName}`
+//         };
+//         res.write(JSON.stringify(returnData));
+//         res.end();
+//     });
+// });
 
 router.get('/', (req, res) => {
     User
-        .find()
+        .find({ _id: { $ne: req.user.id }})
         .then(users => {
             res.status(200).json(users.map(user => user.serialize()));
         })
@@ -122,7 +122,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     User
-        .findById(req.params.id)
+        .findById(req.user.id)
         .then(user => res.status(201).json(user.serialize()))
         .catch(err => {
             console.error(err);
@@ -130,26 +130,65 @@ router.get('/:id', (req, res) => {
         });
 });
 
+router.put('/:id', (req, res) => { 
 
-
-router.put('/:id', (req, res) => {
-    if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
-        res.status(400).json({
-            error: 'Request path ID and request body ID must match'
-        });
-    }
-   
     const updated = {};
-    const updateableFields = ['firstName', 'lastName', 'city', 'state', 'email'];
-    updateableFields.forEach(field => {
+
+    if(req.body.email) {
+        if (!(validator.isEmail(req.body.email))) {
+            const message = `Please enter a valid email address`;
+            console.error(message);
+            return res.status(400).send(message);
+        } else {
+            updated.email = req.body.email;
+        };
+    }
+
+    if(req.body.firstName) {
+        if (!(validator.isAlpha(req.body.firstName))) {
+            const message = 'First name must contain letters only';
+            console.error(message);
+            return res.status(400).send(message);
+        } else {
+            updated.firstName = req.body.firstName;
+        };
+    }
+
+    if(req.body.lastName) {
+        if (!(validator.isAlpha(req.body.lastName))) {
+            const message = 'Last name must contain letters only';
+            console.error(message);
+            return res.status(400).send(message);
+        } else {
+            updated.lastName = req.body.lastName;
+        };
+    }
     
-        if (field in req.body && !(!req.body[field])) {
-            updated[field] = req.body[field];
-        }
-    });
+    if(req.body.city) {
+        if (!(validator.isAlpha(req.body.city))) {
+            const message = 'City name must contain letters only';
+            console.error(message);
+            return res.status(400).send(message);
+        } else {
+            updated.city = req.body.city;
+        };
+    }
+    
+    if(req.body.state) {
+        if (!(validator.isAlpha(req.body.state))) {
+            const message = 'State name must contain letters only';
+            console.error(message);
+            return res.status(400).send(message);
+        } else {
+            updated.state = req.body.state;
+        };
+    }
+
+    //validate file type
+    updated.image = req.body.image;
 
     User
-        .findByIdAndUpdate(req.params.id, { $set: updated }, { new: true })
+        .findByIdAndUpdate(req.user.id, { $set: updated }, { new: true })
         .then(updatedUser => res.status(201).json(updatedUser))
         .catch(err => {
             console.error(err);
@@ -159,7 +198,7 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
     User
-        .findByIdAndRemove(req.params.id)
+        .findByIdAndRemove(req.user.id)
         .then(() => {
             res.status(200).json({ message: 'success' })
         })
