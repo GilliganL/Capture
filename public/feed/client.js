@@ -103,23 +103,23 @@ function displayFeedPosts(data) {
 
         }
     }
+    console.log($(window).width());
+    if ($(window).width() >= 1000) {
+        let prevImg = 0;
+        //add if statement for screen size
+        $('.feed-section').find('.postCaption').each(function () {
 
-    let prevImg = 0;
-    //add if statement for screen size
-    $('.feed-section').find('.postCaption').each(function () {
-        console.log(`prevImg is ${prevImg}`);
-        
-        let img;
-        let content;
-        img = $(this).siblings('img');
-        content = $(this).closest('.flex-item.move-up');
-        $(this).css('width', img.width());
-        $(this).css('height', img.height());
-        $(this).css('margin-top', -(img.height() + 10));
-        content.css('margin-top', -(prevImg / 3));
-        prevImg = img.height();
-        console.log(img.height())
-    })
+            let img;
+            let content;
+            img = $(this).siblings('img');
+            content = $(this).closest('.flex-item.move-up');
+            $(this).css('width', img.width());
+            $(this).css('height', img.height());
+            $(this).css('margin-top', -(img.height() + 10));
+            content.css('margin-top', -(prevImg / 3));
+            prevImg = img.height();
+        });
+    }
 }
 
 
