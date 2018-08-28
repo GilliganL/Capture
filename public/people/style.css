@@ -116,13 +116,18 @@ white: #ffffde
         margin: 5px;
     }
 
-    #username-p {
+    .username-p {
         text-align: center;
-        margin-top: 10px;
+        margin: 10px 0;
     }
 
     .profile-data {
         flex-direction: row;
+    }
+
+    #profile-button {
+        width: 60%;
+
     }
 
     .user-left {

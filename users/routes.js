@@ -6,15 +6,11 @@ const aws = require('aws-sdk');
 const validator = require('validator');
 const passport = require('passport');
 
-const { User } = require('./models');
-
-const { S3_BUCKET } = require('../config');
+const { User, passwordSchema } = require('./models');
 
 aws.config.region = 'us-east-1';
 
 const jwtAuth = passport.authenticate('jwt', { session: false });
-
-
 
 router.post('/', (req, res) => {
     const requiredFields = ['firstName', 'lastName', 'username', 'city', 'state', 'email', 'password'];
@@ -33,7 +29,7 @@ router.post('/', (req, res) => {
         return res.status(400).send(message);
     };
 
-    if (!(validator.isAlphanumeric(req.body.username))) {
+    if (!(validator.isAlphanumeric(req.body.username)) || (req.body.username.trim() !== req.body.username)) {
         const message = 'Please use letters and numbers only in username';
         console.error(message);
         return res.status(400).send(message);
@@ -46,9 +42,12 @@ router.post('/', (req, res) => {
         return res.status(400).send(message);
     }
 
-    //validate state abbreviation
-
-    //validate password length & complexity
+    if(!(passwordSchema.validate(req.body.password))) {
+        const failed = passwordSchema.validate(req.body.password, { list: true});
+        let message = 'Password does not meet requirements';
+        console.error(message);
+        return res.status(400).send(message);
+    }
 
     User
         .findOne({ username: req.body.username })
@@ -80,33 +79,6 @@ router.post('/', (req, res) => {
 });
 
 router.use(jwtAuth);
-
-// router.get('/sign-s3', (req, res) => {
-
-//     const s3 = new aws.S3();
-//     const fileName = req.query['file-name'];
-//     const fileType = req.query['file-type'];
-//     const s3Params = {
-//         Bucket: S3_BUCKET,
-//         Key: `profile-images/${fileName}`,
-//         Expires: 600,
-//         ACL: 'public-read',
-//         ContentType: fileType
-//     };
-
-//     s3.getSignedUrl('putObject', s3Params, (err, data) => {
-//         if (err) {
-//             console.log(err);
-//             return res.end();
-//         }
-//         const returnData = {
-//             signedRequest: data,
-//             url: `https://${S3_BUCKET}.s3.amazonaws.com/feed-post-images/${fileName}`
-//         };
-//         res.write(JSON.stringify(returnData));
-//         res.end();
-//     });
-// });
 
 router.get('/', (req, res) => {
     User

@@ -2,41 +2,40 @@
 function listenForLogin() {
     $('#login-form').on('submit', event => {
         event.preventDefault();
- 
+
         let username = $('#login-username').val().trim();
         let password = $('#login-password').val().trim();
 
         login(username, password);
-   
+
     });
 }
 
 function login(username, password) {
-
-        $.ajax({
-            url: '/api/auth/login',
-            headers: {
-                'content-type': 'application/json'
-            },
-            data: JSON.stringify({
-                username, password
-            }),
-            method: 'post',
-            success: ((token) => {
-                localStorage.authToken = token.authToken;
-                localStorage.id = token.id;
-                window.location = '/feed';
-            }),
-            error: (res) => {
-                alert(res.responseText);
-            }
-        });
+    $.ajax({
+        url: '/api/auth/login',
+        headers: {
+            'content-type': 'application/json'
+        },
+        data: JSON.stringify({
+            username, password
+        }),
+        method: 'post',
+        success: ((token) => {
+            localStorage.authToken = token.authToken;
+            localStorage.id = token.id;
+            window.location = '/feed';
+        }),
+        error: () => {
+            alert('Please enter a valid username and password');
+        }
+    });
 }
 
 function listenForLogoutButton() {
-    $('.logout-container').on('click', 'button', function(event) {
+    $('#logout').on('click', 'button', function (event) {
         event.preventDefault();
-        
+
         $.ajax({
             url: '/api/auth/logout',
             headers: {
@@ -50,7 +49,7 @@ function listenForLogoutButton() {
                 window.location = '/';
             },
             error: (res) => {
-                alert:(res.responseText);
+                alert(res.responseText);
             }
         });
     });
@@ -62,8 +61,8 @@ function listenForSignUpButton() {
 
         let firstName = $('#firstName').val().trim();
         let lastName = $('#lastName').val().trim();
-        let username = $('#username').val().trim();
-        let password = $('#password').val().trim();
+        let username = $('#username').val();
+        let password = $('#password').val();
         let city = $('#city').val().trim();
         let state = $('#state').val().trim();
         let email = $('#email').val().trim();
@@ -71,19 +70,23 @@ function listenForSignUpButton() {
         $.ajax({
             url: '/api/users',
             headers: {
-                'content-type': 'application/json',
+                'content-type': 'application/json'
             },
             data: JSON.stringify({
                 firstName, lastName, username, password, city, state, email
             }),
-            method: 'post'
-        })
-        .done((user) => login(username, password))
-        // window.location = '/people';
-    })
+            type: 'POST',
+            success: () => {
+                login(username, password);
+            },
+            error: (res) => {
+                alert(res.responseText);
+            }
+        });
+    });
 }
 
-$(function() {
+$(function () {
     listenForLogin();
     listenForSignUpButton();
     listenForLogoutButton();

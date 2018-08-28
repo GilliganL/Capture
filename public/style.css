@@ -25,7 +25,6 @@ body {
 
 main {
     width: 100%;
-    padding: 20px 0;
 }
 
 h1 {
@@ -56,6 +55,11 @@ p {
     margin: 3px;
 }
 
+a {
+    text-decoration: none;
+    color: #ffffde;
+}
+
 .nav-bar {
     display: flex;
     flex-direction: row;
@@ -77,29 +81,37 @@ p {
 }
 
 .nav-link {
-    min-width: 200px;
+    min-width: 250px;
     flex-basis: 100px;
     display: inline-block;
     text-align: center;
 }
 
-.nav-link a {
-    text-decoration: none;
-    color: #ffffde;
+#feed,
+#new-post {
+    text-align: right;
 }
 
-#logo {
-    flex-grow: 2;
+#people {
+    text-align: left;
 }
 
 #feed, 
 #people,
-#new-post {
+#new-post,
+#logo
+ {
     flex-grow: 1;
 }
 
+#logout {
+    position: absolute;
+    top: 10px;
+    right: -60px;
+}
+
 #people a:hover, 
-#new-post a:hover, 
+#new-post:hover, 
 #logo a:hover,
 #feed a:hover {
     cursor: pointer;
@@ -296,6 +308,7 @@ legend {
     flex-grow: 1;
     padding: 5px;
     margin: 5px;
+    margin-bottom: 50px;
     height: 220px;
 }
 
@@ -308,24 +321,54 @@ legend {
     margin: 5px;
 }
 
+@media only screen and (max-width: 1030px) {
+    #logout {
+        top: 12px;
+        right: -58px;
+    }
+
+}
 
 @media only screen and (max-width: 600px) {
+    main {
+        padding-top: 0;
+    }
+
     h1 {
-        margin: 15px 0;
+        margin: 25px 0;
     }
     
     h3 {
         margin: 10px 0;
     }
+
+    .nav-bar {
+        flex-direction: column;
+    }
+
+    .nav-link {
+        flex-basis: auto;
+    }
     
     #logo {
         order: 1;
+        min-width: 250px;
+    }
+
+    #logout {
+        order: 3;
+        margin: 10px 0;
+        position: relative;
+        top: 0;
+        right: 0;
     }
     
     #feed, 
     #people,
     #new-post {
         order: 2;
-    }
+        text-align: center;
+        min-width: 250px;
+    }    
 
 }

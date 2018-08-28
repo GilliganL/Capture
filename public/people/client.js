@@ -23,9 +23,9 @@ function listenForSubmitForm() {
                 image, firstName, lastName, city, state, email
             }),
             type: 'PUT',
-            success: (() => getAndDisplayProfile()),
+            success: () => getAndDisplayProfile(),
             error: (res) => {
-                alert(res.responseText);
+                console.log(res);
             }
         });
     });

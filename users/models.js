@@ -1,7 +1,8 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const passwordValidator = require('password-validator');
 mongoose.Promise = global.Promise;
 
 const userSchema = mongoose.Schema({
@@ -21,6 +22,16 @@ const userSchema = mongoose.Schema({
     email: {type: String, required: true},
     image: {type: String, required: true, default: '/images/preview-avatar.png'}
 });
+
+const passwordSchema = new passwordValidator();
+
+passwordSchema
+.is().min(8)
+.is().max(72)
+.has().uppercase()
+.has().lowercase()
+.has().digits()
+.has().not().spaces()
 
 userSchema.virtual('fullName').get(function() {
     return `${this.firstName} ${this.lastName}`.trim();
@@ -51,4 +62,4 @@ userSchema.methods.validatePassword = function(password) {
 const User = mongoose.model('User', userSchema);
 
 
-module.exports = { User };
+module.exports = { User, passwordSchema };
