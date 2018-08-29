@@ -25,6 +25,7 @@ body {
 
 main {
     width: 100%;
+    margin-top: 130px;
 }
 
 h1 {
@@ -61,14 +62,16 @@ a {
 }
 
 .nav-bar {
+    position: fixed;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
-    position: relative;
     min-height: 75px;
     width: 100%;
     top: 0;
-    z-index: 1;
+    z-index: 10;
+    background: #372D3B;
 }
 
 .nav-container {
@@ -161,8 +164,8 @@ form {
 hr {
     width: 60%;
     height: 2px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     border-width: 0;
     color: #D94362;
     background-color: #D94362;
@@ -321,17 +324,20 @@ legend {
     margin: 5px;
 }
 
+/*Getting Smaller Screens less than 1030px */
 @media only screen and (max-width: 1030px) {
     #logout {
         top: 12px;
         right: -58px;
+        /* position: static; */
     }
-
 }
 
+/*Screens less than 600px*/
 @media only screen and (max-width: 600px) {
     main {
         padding-top: 0;
+        margin-top: 30px;
     }
 
     h1 {
@@ -344,6 +350,7 @@ legend {
 
     .nav-bar {
         flex-direction: column;
+        position: static;
     }
 
     .nav-link {
@@ -371,4 +378,9 @@ legend {
         min-width: 250px;
     }    
 
+    hr {
+        order: 4;
+        margin-top: 20px;
+    }
 }
+

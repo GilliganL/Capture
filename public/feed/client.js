@@ -27,10 +27,12 @@ function listenForSubmitPost() {
             data: JSON.stringify({
                 image, userId, caption
             }),
-            method: 'post'
-        })
-            .done(() => getAndDisplayFeedPosts());
-        //prepend instead of new get?
+            type: 'POST',
+            success: () => getAndDisplayFeedPosts(),
+            error: (res) => {
+                console.log(res);
+            }
+        });
     });
 }
 
@@ -43,9 +45,12 @@ function getFeedPosts(callback) {
             'content-type': 'application/json',
             'authorization': 'bearer ' + localStorage.authToken
         },
-        type: 'GET'
-    })
-        .done((data) => callback(data));
+        type: 'GET',
+        success: (data) => callback(data),
+        error: (res) => {
+            console.log(res);
+        }
+    });
 }
 
 function displayFeedPosts(data) {
@@ -60,13 +65,14 @@ function displayFeedPosts(data) {
     for (index in data) {
         if (index == 0) {
             $('.feed-section').append(
-                `<div class='postDiv flex-item'>
+                `<div class=' flex-item'>
                     <div class='flex-item-hidden'></div>
-                    <div class='flex-item-date' id='flex-item-date-0'></div>
-                    <div class='flex-item-content'>
-                    <a class='getById' href=# data-id="${data[index].userId}"><h3 class='poster'> ${data[index].user}</h3></a>
+                    <div class='flex-item-date' id='flex-item-date-0'>
+                    <div class='line-right'></div></div>
+                    <div class='flex-item-content content-right'>
+                    <a class='getById' href=# data-id="${data[index].userId}"><h4 class='poster'> ${data[index].user}</h4></a>
                     <div class='card-right'>
-                        <a class='show-caption' href='#'>X</a>
+                        <a class='show-caption' href='#'>+</a>
                         <img class='postImage' src="${data[index].image}">
                         <div class='postCaption'><p>${data[index].caption}</p></div>
                         </div>
@@ -74,13 +80,14 @@ function displayFeedPosts(data) {
                 </div>`);
         } else if (index % 2 == 0) {
             $('.feed-section').append(
-                `<div class='postDiv flex-item move-up'>
+                `<div class=' flex-item move-up'>
                     <div class='flex-item-hidden'></div>
-                    <div class='flex-item-date'></div>
-                    <div class='flex-item-content'>
-                    <a class='getById' href=# data-id="${data[index].userId}"><h3 class='poster'> ${data[index].user}</h3></a>
+                    <div class='flex-item-date'>
+                    <div class='line-right'></div></div>
+                    <div class='flex-item-content content-right'>
+                    <a class='getById' href=# data-id="${data[index].userId}"><h4 class='poster'> ${data[index].user}</h4></a>
                     <div class='card-right'>
-                        <a class='show-caption' href='#'>X</a>
+                        <a class='show-caption' href='#'>+</a>
                         <img class='postImage' src="${data[index].image}">
                         <div class='postCaption'><p>${data[index].caption}</p></div>
                         </div>
@@ -88,13 +95,14 @@ function displayFeedPosts(data) {
                 </div>`);
         } else {
             $('.feed-section').append(
-                `<div class='postDiv flex-item move-up flex-item-flipped '>
+                `<div class=' flex-item move-up flex-item-flipped content-left'>
                     <div class='flex-item-hidden'></div>
-                    <div class='flex-item-date'></div>
+                    <div class='flex-item-date'>
+                    <div class='line-left'></div></div>
                     <div class='flex-item-content'>
-                    <a class='getById' href=# data-id="${data[index].userId}"><h3 class='poster'> ${data[index].user}</h3></a>
-                        <div class='card-left'>
-                        <a class='show-caption' href='#'>X</a>
+                    <a class='getById' href=# data-id="${data[index].userId}"><h4 class='poster'> ${data[index].user}</h4></a>
+                    <div class='card-left'>
+                        <a class='show-caption' href='#'>+</a>
                         <img class='postImage' src="${data[index].image}">
                         <div class='postCaption'><p>${data[index].caption}</p></div>
                         </div>
@@ -103,25 +111,25 @@ function displayFeedPosts(data) {
 
         }
     }
-    console.log($(window).width());
-    if ($(window).width() >= 1000) {
-        let prevImg = 0;
-        //add if statement for screen size
-        $('.feed-section').find('.postCaption').each(function () {
 
+    if ($(window).width() >= 760) {
+        let prevImg = 0;
+        $('.feed-section').find('.postCaption').each(function () {
             let img;
             let content;
             img = $(this).siblings('img');
             content = $(this).closest('.flex-item.move-up');
+            $('.show-caption').removeClass('hidden');
             $(this).css('width', img.width());
             $(this).css('height', img.height());
-            $(this).css('margin-top', -(img.height() + 10));
+            $(this).css('margin-top', -(img.height() + 9));
             content.css('margin-top', -(prevImg / 3));
             prevImg = img.height();
         });
+    } else {
+        $('.show-caption').addClass('hidden');
     }
 }
-
 
 function displayCaption() {
     $('.feed-section').on('click', '.show-caption', function (event) {
@@ -132,7 +140,7 @@ function displayCaption() {
         if (!($(this).hasClass('showing'))) {
             $(this).addClass('showing');
             img.css('z-index', 5);
-            img.css('opacity', 0);
+            img.css('opacity', 0.3);
             caption.css('z-index', 10);
             caption.css('opacity', 1);
         } else {
