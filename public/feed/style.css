@@ -119,20 +119,6 @@ white: #ffffde
     position: relative;
 }
 
-.show-caption {
-    position: absolute;
-    font-size: 50px;
-    bottom: 6px;
-    left: 35px;
-    height: 30px;
-    width: 30px;
-    transition: color 300ms;
-}
-
-.show-caption:hover {
-    color: #EC7263;
-    cursor: pointer;
-}
 
 .card-right .postCaption {
     padding-left: 30px;
@@ -144,60 +130,41 @@ white: #ffffde
     margin-left: 67px;
 }
 
-.flex-item-date {
-    position: relative;
-}
 
-.line-left,
-.line-right {
-    height: 4px;
-    width: 44px;
-    background: #D94362;
-    position: absolute;
-}
 
-/* Pseudo Element timeline line */
-
-.feed-section {
-    position: relative;
-    z-index: 1;
-    /* overflow: hidden; */
-    background: #D94362;
-}
-
-.feed-section:before,
-.feed-section:after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 10px;
-    background: #372D3B;
-}
-
-.feed-section:after {
-    left: 14px;
-    width: 400px;
-    background: #372D3B;
-}
 
 /*600px and above */
 
 @media only screen and (min-width: 760px) {
+
+/* Pseudo Element timeline line */
+
     .feed-section {
+        position: relative;
+        z-index: 1;
+        background: #D94362;
         max-width: 760px;
     }
+
     .feed-section:before,
     .feed-section:after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
         width: 378px;
+        background: #372D3B;
     }
+
     .feed-section:after {
         left: 382px;
         width: 378px;
+        background: #372D3B;
     }
+
     .flex-item-hidden,
     .flex-item-content {
         width: 50%;
@@ -214,6 +181,14 @@ white: #ffffde
     }
     .flex-item-date {
         flex-basis: 100px;
+        position: relative;
+    }
+    .line-left,
+    .line-right {
+        height: 4px;
+        width: 44px;
+        background: #D94362;
+        position: absolute;
     }
     .line-left {
         bottom: 30%;
@@ -228,8 +203,20 @@ white: #ffffde
         opacity: 0;
         background: rgba(0, 0, 0, 0.9);
     }
+    
     .show-caption {
+        position: absolute;
+        font-size: 50px;
         bottom: 6px;
+        left: 35px;
+        height: 30px;
+        width: 30px;
+        transition: color 300ms;
+    }
+
+    .show-caption:hover {
+        color: #EC7263;
+        cursor: pointer;
     }
     
     .card-right .show-caption {
