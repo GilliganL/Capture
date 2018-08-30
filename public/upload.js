@@ -3,8 +3,7 @@
     $('#uploadPhoto').on('change', event => {    
         const files = event.target.files;
         const file = files[0];
-        //change file name on upload
-
+      
         if(file == null) {
             return alert('No file selected');
         }

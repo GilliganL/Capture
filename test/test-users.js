@@ -42,10 +42,10 @@ function generateUserData() {
     };
 }
 
-const username = 'exampleUser';
-const password = 'examplePass';
-const firstName = 'Example';
-const lastName = 'User';
+const username = 'dennis';
+const password = 'Password123!';
+const firstName = 'Dennis';
+const lastName = 'Reynolds';
 const email = 'test@test.com';
 const state = 'CO';
 const city = 'Denver';
