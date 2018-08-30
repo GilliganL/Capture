@@ -3,14 +3,7 @@
     $('#uploadPhoto').on('change', event => {    
         const files = event.target.files;
         const file = files[0];
-        
-        // console.log(file);
-        
-        // file.name = uuidv1();
-
-        // console.log(file.name);
-        //validate file type
-        //change file name?
+        //change file name on upload
 
         if(file == null) {
             return alert('No file selected');

@@ -35,13 +35,6 @@ router.post('/', (req, res) => {
         return res.status(400).send(message);
     }
 
-    if (!(validator.isAlpha(req.body.state)) || !(validator.isAlpha(req.body.firstName))
-    || !(validator.isAlpha(req.body.lastName)) || !(validator.isAlpha(req.body.city))) {
-        const message = 'First name, last name, city and state must be letters only';
-        console.error(message);
-        return res.status(400).send(message);
-    }
-
     if(!(passwordSchema.validate(req.body.password))) {
         const failed = passwordSchema.validate(req.body.password, { list: true});
         let message = 'Password does not meet requirements';
@@ -93,6 +86,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
+  
     User
         .findById(req.user.id)
         .then(user => res.status(201).json(user.serialize()))
@@ -104,7 +98,12 @@ router.get('/:id', (req, res) => {
 
 router.put('/:id', (req, res) => { 
 
-    const updated = {};
+    const updated = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        city: req.body.city,
+        state: req.body.state
+    };
 
     if(req.body.email) {
         if (!(validator.isEmail(req.body.email))) {
@@ -115,47 +114,6 @@ router.put('/:id', (req, res) => {
             updated.email = req.body.email;
         };
     }
-
-    if(req.body.firstName) {
-        if (!(validator.isAlpha(req.body.firstName))) {
-            const message = 'First name must contain letters only';
-            console.error(message);
-            return res.status(400).send(message);
-        } else {
-            updated.firstName = req.body.firstName;
-        };
-    }
-
-    if(req.body.lastName) {
-        if (!(validator.isAlpha(req.body.lastName))) {
-            const message = 'Last name must contain letters only';
-            console.error(message);
-            return res.status(400).send(message);
-        } else {
-            updated.lastName = req.body.lastName;
-        };
-    }
-    
-    if(req.body.city) {
-        if (!(validator.isAlpha(req.body.city))) {
-            const message = 'City name must contain letters only';
-            console.error(message);
-            return res.status(400).send(message);
-        } else {
-            updated.city = req.body.city;
-        };
-    }
-    
-    if(req.body.state) {
-        if (!(validator.isAlpha(req.body.state))) {
-            const message = 'State name must contain letters only';
-            console.error(message);
-            return res.status(400).send(message);
-        } else {
-            updated.state = req.body.state;
-        };
-    }
-
     //validate file type
     updated.image = req.body.image;
 

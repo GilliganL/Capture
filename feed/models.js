@@ -4,9 +4,8 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const feedPostSchema = mongoose.Schema({
-    //thinking of when you try to get more info on client side
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    image: {type: String, required: true},
+    image: {type: String},
     caption: {type: String},
     created: {type: Date, default: Date.now}
 });

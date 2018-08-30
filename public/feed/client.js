@@ -13,7 +13,6 @@ function listenForSubmitPost() {
 
         let image = $('#save-url').val();
         let caption = $('#caption').val();
-        let userId = '5b7e0986786ee64b34216382';
 
         $('#uploadPhoto').val('');
         $('#caption').val('');
@@ -25,7 +24,7 @@ function listenForSubmitPost() {
                 'authorization': 'bearer ' + localStorage.authToken
             },
             data: JSON.stringify({
-                image, userId, caption
+                image, caption
             }),
             type: 'POST',
             success: () => getAndDisplayFeedPosts(),
@@ -115,20 +114,49 @@ function displayFeedPosts(data) {
     if ($(window).width() >= 760) {
         let prevImg = 0;
         $('.feed-section').find('.postCaption').each(function () {
-            let img;
-            let content;
-            img = $(this).siblings('img');
-            content = $(this).closest('.flex-item.move-up');
+            
+            let img = $(this).siblings('img');
+            let caption = $(this);
+            let content = $(this).closest('.flex-item.move-up');
+
+            calculateCaptionStyles(img, caption, content, prevImg);
+
             $('.show-caption').removeClass('hidden');
-            $(this).css('width', img.width());
-            $(this).css('height', img.height());
-            $(this).css('margin-top', -(img.height() + 9));
-            content.css('margin-top', -(prevImg / 3));
+          
             prevImg = img.height();
         });
     } else {
-        $('.show-caption').addClass('hidden');
+            $('.show-caption').addClass('hidden');
     }
+}
+
+function calculateCaptionStyles(img, caption, content, prevImg) {
+    caption.css('width', img.width());
+    caption.css('height', img.height());
+    caption.css('margin-top', -(img.height() + 9));
+    content.css('margin-top', -(prevImg / 3));
+
+}
+
+const state = {
+    previousSize: $(window).width()
+}
+
+function resizeWindow() {
+    $(window).resize(function () {
+        let newSize = $(window).width();
+        console.log(`Prev size: ${state.previousSize}`)
+        console.log(`New size: ${newSize}`);
+        
+        if (state.previousSize >= 960 && newSize < 960) {
+            getAndDisplayFeedPosts();
+        } else if (state.previousSize >= 760 && (newSize >= 960 || newSize < 760)) {
+            getAndDisplayFeedPosts();
+        } else if (state.previousSize < 760 && newSize >= 760) {
+            getAndDisplayFeedPosts();
+        }
+        state.previousSize = newSize;
+    });
 }
 
 function displayCaption() {
@@ -193,4 +221,5 @@ $(function () {
     getAndDisplayFeedPosts();
     //listenForGetById();
     displayCaption();
+    resizeWindow();
 })

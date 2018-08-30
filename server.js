@@ -30,8 +30,6 @@ app.use('/api/users/', userRoutes);
 app.use('/api/feed', jwtAuth, feedPostsRoutes);
 app.use('/api/auth/', authRouter);
 
-
-
 app.use((req, res, next) => {
     res.sendStatus(404);
     next();

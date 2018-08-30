@@ -38,7 +38,6 @@ router.get('/sign-s3', (req, res) => {
     });
 });
 
-//how do you set up pagination? .limit(10) and .skip(page*x) page comes from req
 router.get('/', (req, res) => {
     FeedPost
         .find()
@@ -82,7 +81,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     //user is person logged in: req.user has info about use who is logged in
-    const requiredFields = ['userId', 'image'];
+    const requiredFields = ['image'];
     for(let i=0; i<requiredFields.length; i++) {
         const field = requiredFields[i];
         if(!(field in req.body)) {
@@ -102,7 +101,6 @@ router.post('/', (req, res) => {
             created: { $gte: startOfToday }
         })
         .then(post => {
-            console.log(req.body.image);
             if(post) {
                 res.status(400).json({error: 'Already posted today'});
                 return 
