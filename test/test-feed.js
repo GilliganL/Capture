@@ -300,6 +300,7 @@ describe('Feed Post API resource', function () {
                     expect(response).to.include.keys(
                         'signedRequest', 'url');
                 })
+                .done()
         });
     });
 });
