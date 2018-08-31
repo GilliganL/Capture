@@ -52,14 +52,64 @@ function getFeedPosts(callback) {
     });
 }
 
+const state = {
+    previousSize: $(window).width()
+}
+
+function resizeWindow() {
+    $(window).resize(function () {
+        let newSize = $(window).width();
+        
+        if (state.previousSize >= 960 && newSize < 960) {
+            getAndDisplayFeedPosts();
+        } else if (state.previousSize >= 760 && (newSize >= 960 || newSize < 760)) {
+            getAndDisplayFeedPosts();
+        } else if (state.previousSize < 760 && newSize >= 760) {
+            getAndDisplayFeedPosts();
+        }
+        state.previousSize = newSize;
+    });
+}
+
+function displayCaption() {
+    $('.feed-section').on('click', '.show-caption', function (event) {
+        event.preventDefault();
+        let img = $(this).siblings('.postImage');
+        let caption = $(this).siblings('.postCaption');
+
+        if (!($(this).hasClass('showing'))) {
+            $(this).addClass('showing');
+            img.css('z-index', 5);
+            img.css('opacity', 0.3);
+            caption.css('z-index', 10);
+            caption.css('opacity', 1);
+        } else {
+
+            $(this).removeClass('showing');
+            img.css('z-index', 10);
+            img.css('opacity', 1);
+            caption.css('z-index', 5);
+            caption.css('opacity', 0);
+        }
+    });
+}
+
+
+
+function getAndDisplayFeedPosts() {
+    $('.feed-section').empty();
+    getFeedPosts(displayFeedPosts);
+}
+
+
+function calculateCaptionStyles(img, caption, content, prevImg) {
+    content.css('margin-top', -(prevImg / 3));
+    caption.css('height', img.height());
+    caption.css('margin-top', -(img.height() + 9));
+    caption.css('width', img.width());
+}
+
 function displayFeedPosts(data) {
-    //returned data, create hidden section or variable to store userId for future searches?
-    // caption    :"some caption"
-    // created:"2018-08-18T23:25:21.742Z"
-    // id : "5b71b5871080d01629dc0e97"
-    //userId: "xxxxx",
-    // image : "some image file"
-    // user : "Lynsey Powell"
 
     for (index in data) {
         if (index == 0) {
@@ -130,96 +180,10 @@ function displayFeedPosts(data) {
     }
 }
 
-function calculateCaptionStyles(img, caption, content, prevImg) {
-    caption.css('width', img.width());
-    caption.css('height', img.height());
-    caption.css('margin-top', -(img.height() + 9));
-    content.css('margin-top', -(prevImg / 3));
-
-}
-
-const state = {
-    previousSize: $(window).width()
-}
-
-function resizeWindow() {
-    $(window).resize(function () {
-        let newSize = $(window).width();
-        console.log(`Prev size: ${state.previousSize}`)
-        console.log(`New size: ${newSize}`);
-        
-        if (state.previousSize >= 960 && newSize < 960) {
-            getAndDisplayFeedPosts();
-        } else if (state.previousSize >= 760 && (newSize >= 960 || newSize < 760)) {
-            getAndDisplayFeedPosts();
-        } else if (state.previousSize < 760 && newSize >= 760) {
-            getAndDisplayFeedPosts();
-        }
-        state.previousSize = newSize;
-    });
-}
-
-function displayCaption() {
-    $('.feed-section').on('click', '.show-caption', function (event) {
-        event.preventDefault();
-        let img = $(this).siblings('.postImage');
-        let caption = $(this).siblings('.postCaption');
-
-        if (!($(this).hasClass('showing'))) {
-            $(this).addClass('showing');
-            img.css('z-index', 5);
-            img.css('opacity', 0.3);
-            caption.css('z-index', 10);
-            caption.css('opacity', 1);
-        } else {
-
-            $(this).removeClass('showing');
-            img.css('z-index', 10);
-            img.css('opacity', 1);
-            caption.css('z-index', 5);
-            caption.css('opacity', 0);
-        }
-    });
-}
-
-// function displayFeedPostsById(data) {
-//     //return array of same data listed above
-//     //put in lightbox to display
-//     console.log(data);
-
-// }
-
-// function getFeedPostsById(id, callback) {
-//     $.ajax({
-//         url: `/api/feed/${id}`,
-//         headers: {
-//             'content-type': 'application/json',
-//             'authorization': 'bearer ' + localStorage.authToken
-//         },
-//         type: 'GET'
-//     })
-//     .done((data) => callback(data));
-// }
-
-// function listenForGetById() {
-//     $('.feed-section').on('click', 'a', function(event) {
-//         event.preventDefault();
-//         const userId = $(this).data('id');
-
-//         getFeedPostsById(userId, displayFeedPostsById);
-//     })
-// }
-
-function getAndDisplayFeedPosts() {
-    $('.feed-section').empty();
-    getFeedPosts(displayFeedPosts);
-}
-
 $(function () {
+    getAndDisplayFeedPosts();
+    displayCaption();
     listenForNewPost();
     listenForSubmitPost();
-    getAndDisplayFeedPosts();
-    //listenForGetById();
-    displayCaption();
     resizeWindow();
 })

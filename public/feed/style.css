@@ -6,45 +6,37 @@ yellow: #FEBE7E
 cream: #FFEDBC
 white: #ffffde
 */
-
-.post-bar {
-    background-color: #E7D1CC;
-    padding: 5px 10px;
+#post-form {
+    margin: 0 auto;
+    max-width: 960px;
 }
 
-#post-form {
+#post-form-wrapper {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
     justify-content: center;
-    width: 100%;
-    padding: 5px 10px;
 }
 
-#post-form label,
-#post-form input,
-#post-form button {
-    margin: 5px;
-    height: 36px;
-    border: 1px solid black;
+#hidden-post-row {
+    width: .1px;
+    height: .1px;
 }
 
-#post-form input {
-    flex-grow: 2;
-    padding: 5px 10px;
-    text-align: left;
+.new-post-form .form-row {
+    min-width: 250px;
+    justify-content: center;
 }
 
-#post-form label {
-    flex-grow: 1;
-    padding: 8px 10px 5px 10px;
+#caption-label {
     text-align: center;
+    width: 250px;
+    font-size: 22px;
 }
 
-#post-form button {
-    flex-grow: 2;
-    padding: 5px 10px;
-    text-align: center;
+#input-file-label-f,
+#submitPost
+ {
+    min-width: 250px;
 }
 
 .flex-container {
@@ -63,17 +55,18 @@ white: #ffffde
     flex-wrap: nowrap;
     justify-content: left;
     text-align: center;
+    border-bottom: 4px solid #D94362;
 }
 
 .flex-item-date {
     order: 2;
     flex-basis: 60px;
-    display: flex;
+    display: none;
 }
 
 .flex-item-content {
     order: 3;
-    width: 80%;
+    width: 100%;
 }
 
 .flex-item-hidden {
@@ -97,13 +90,12 @@ white: #ffffde
 }
 
 .flex-item.flex-item-flipped h4 {
-    text-align: right;
-    padding-right: 15px;
+    text-align: center;
 }
 
 .postImage {
     border-radius: 10px;
-    width: 80%;
+    width: 100%;
     z-index: 10;
     opacity: 1;
     border: 4px solid #FEBE7E;
@@ -117,20 +109,18 @@ white: #ffffde
 .card-right,
 .card-left {
     position: relative;
+    height: 100%;
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
-
-.card-right .postCaption {
-    padding-left: 30px;
-    margin-left: 15px;
+.new-post-form {
+    flex-direction: column;
+    align-items: center;
+    background: #372D3B;
+    z-index: 10;
 }
-
-.card-left .postCaption {
-    padding-right: 30px;
-    margin-left: 67px;
-}
-
-
 
 
 /*600px and above */
@@ -139,6 +129,32 @@ white: #ffffde
 
 /* Pseudo Element timeline line */
 
+    .flex-item.flex-item-flipped h4 {
+        text-align: right;
+        padding-right: 15px;
+    }
+    .new-post-form {
+        position: fixed;
+        top: 100px;
+        width: 100%;
+    }
+    #post-form {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    #post-form .form-row {
+        min-width: 100px;
+        justify-content: flex-end;
+    }
+    #caption-label {
+        text-align: right;
+        padding-right: 30px;
+        width: 100px;
+    }
+
+    #submitPost {
+        min-width: 100px;;
+    }
     .feed-section {
         position: relative;
         z-index: 1;
@@ -165,6 +181,10 @@ white: #ffffde
         background: #372D3B;
     }
 
+    .flex-item {
+        border: none;
+    }
+
     .flex-item-hidden,
     .flex-item-content {
         width: 50%;
@@ -179,7 +199,9 @@ white: #ffffde
     .flex-item-flipped .flex-item-hidden {
         order: 3;
     }
+
     .flex-item-date {
+        display: flex;
         flex-basis: 100px;
         position: relative;
     }
@@ -197,6 +219,9 @@ white: #ffffde
         right: 5px;
         bottom: 30%;
     }
+    .postImage {
+        width: 80%;
+    }
     .postCaption {
         padding-top: 20px;
         z-index: 5;
@@ -207,7 +232,7 @@ white: #ffffde
     .show-caption {
         position: absolute;
         font-size: 50px;
-        bottom: 6px;
+        bottom: 46px;
         left: 35px;
         height: 30px;
         width: 30px;
@@ -218,6 +243,16 @@ white: #ffffde
         color: #EC7263;
         cursor: pointer;
     }
+
+    /* .card-right .postCaption {
+        padding-left: 30px;
+        margin-left: 15px;
+    }
+    
+    .card-left .postCaption {
+        padding-right: 30px;
+        margin-left: 67px;
+    } */
     
     .card-right .show-caption {
         left: 6px;
@@ -226,15 +261,29 @@ white: #ffffde
 
     .card-right .postCaption {
         margin-left: 5px;
+        padding-left: 30px;
     }
 
     .card-left .postCaption {
         margin-left: 90px;
+        padding-right: 30px;
     }
     
     .card-left .show-caption {
         right: 6px;
         left: initial;
+    }
+    .card-left,
+    .card-right {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .card-right {
+        text-align: left;
+    }
+    .card-left {
+        text-align: right;
     }
 }
 

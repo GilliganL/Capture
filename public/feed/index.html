@@ -20,9 +20,7 @@
                 <h3>New Post</h3>
             </div>
             <div class='nav-link' id='logo'>
-                <a href='/feed'>
-                    <h1>Postcard</h1>
-                </a>
+                <h1>Postcard</h1>
             </div>
             <div class='nav-link' id='people'>
                 <a href='/people'>
@@ -39,14 +37,28 @@
         <div class='new-post-form hidden'>
             <h2>Upload a Postcard</h2>
             <form id='post-form'>
-                <label for='#uploadPhoto'>New Photo</label>
-                <input type='file' id='uploadPhoto' placeholder='Choose a file'>
-                <input type='hidden' id='save-url' name='save-url' value=''>
-                <label for='#caption'>Caption</label>
-                <input type='text' id='caption' name='caption' placeholder='Caption'><br>
-                <button type='submit' id='submitPost' value='New post'>Post</button>
+                <ul class='form-wrapper' id='post-form-wrapper'>
+                    <li class='form-row' id='caption-label'>
+                        <label for='#caption'>Caption</label>
+                    </li>
+                    <li class='form-row file-row'>
+                        <input type='text' id='caption' name='caption' placeholder='Caption'>
+                    </li>
+                    <li class='form-row file-row'>
+                        <label for='#uploadPhoto' id='input-file-label-f'>New Photo</label>
+                    </li>
+                    <li class='form-row hidden' id='hidden-post-row'>
+                        <input type='file' class='input-file uploadPhoto' placeholder='Choose a file'>
+                        <input type='hidden' id='save-url' name='save-url' value=''>
+                    </li>
+                    <li class='form-row'>
+                        <button type='submit' id='submitPost' value='New post'>Post</button>
+                    </li>
+                </ul>
             </form>
+            <hr>
         </div>
+        <hr>
         <div class='feed-section flex-container'></div>
     </main>
     <hr>

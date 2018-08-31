@@ -1,6 +1,6 @@
 
 (() => {
-    $('#uploadPhoto').on('change', event => {    
+    $('.uploadPhoto').on('change', event => {    
         const files = event.target.files;
         const file = files[0];
       
