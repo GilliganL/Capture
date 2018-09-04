@@ -146,11 +146,15 @@ a {
 }
 
 .landing-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     position: relative;
     height: 400px;
     width: 100%;
     background: url('https://images.pexels.com/photos/265946/pexels-photo-265946.jpeg') center center no-repeat;
     background-size: cover;
+    z-index: -1;
 }
 
 .landing-page:before {
@@ -160,8 +164,9 @@ a {
     right: 0;
     bottom: 0;
     left: 0;
-    background-image: linear-gradient(to bottom right, #372D3B, #D94362);
+    background-image: linear-gradient(to bottom right, #372D3B, #FEBE7E);
     opacity: .6;
+    z-index: -1;
   }
 
   .landing-info {
@@ -358,7 +363,7 @@ button:hover {
 }
 
 footer {
-    position: fixed;
+    position: relative;
     bottom: 0;
     display: flex;
     -webkit-flex-direction: row;
@@ -389,6 +394,7 @@ footer p {
     -ms-justify-content: center;
     justify-content: center;
     margin: 0 auto;
+    margin-top: 20px;
     width: 100%;
     max-width: 960px;
 }
