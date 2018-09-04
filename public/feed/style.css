@@ -6,46 +6,22 @@ yellow: #FEBE7E
 cream: #FFEDBC
 white: #ffffde
 */
-#post-form {
-    margin: 0 auto;
-    max-width: 960px;
-}
 
-#post-form-wrapper {
+.new-post-form {
     display: flex;
-    -webkit-flex-wrap: wrap;
-    -moz-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -webkit-justify-content: center;
-    -moz-justify-content: center;
-    -ms-justify-content: center;
-    justify-content: center;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    align-items: center;
+    padding-bottom: 10px;
+    background: #372D3B;
+    z-index: 10;
 }
 
-#hidden-post-row {
-    width: .1px;
-    height: .1px;
-}
-
-.new-post-form .form-row {
-    min-width: 250px;
-    -webkit-justify-content: center;
-    -moz-justify-content: center;
-    -ms-justify-content: center;
-    justify-content: center;
-}
-
-#caption-label {
-    text-align: center;
-    width: 250px;
-    font-size: 22px;
-}
-
-#input-file-label-f,
-#submitPost
- {
-    min-width: 250px;
+#post-form {
+    max-width: 350px;
 }
 
 .flex-container {
@@ -58,6 +34,7 @@ white: #ffffde
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     margin: 0 auto;
+    padding: 20px 0;
     max-width: 960px;
 }
 
@@ -73,7 +50,6 @@ white: #ffffde
     -ms-justify-content: left;
     justify-content: left;
     text-align: center;
-    border-bottom: 4px solid #D94362;
 }
 
 .flex-item-date {
@@ -94,6 +70,11 @@ white: #ffffde
     -ms-order: 3;
     order: 3;
     width: 100%;
+    max-height: 600px;
+    min-height: 310px;
+    border: 2px solid #FFFFDE;
+    background: #372D3B;
+    color: #FFFFDE;
 }
 
 .flex-item-hidden {
@@ -120,26 +101,26 @@ white: #ffffde
 
 .flex-item h4 {
     margin: 10px 0;
-    padding-left: 25px;
+    padding-left: 45px;
     font-size: 20px;
     letter-spacing: 1px;
+    color: #372D3B;
 }
 
-.flex-item.flex-item-flipped h4 {
-    text-align: center;
+.flex-item-flipped h4 {
+    padding-right: 45px;
 }
 
 .postImage {
-    border-radius: 10px;
     width: 100%;
-    z-index: 10;
-    opacity: 1;
-    border: 2px solid #EC7263;
+    max-height: 500px;
+    /* border: 2px solid #EC7263;
+     border-radius: 10px; */
 }
 
 .postCaption {
-    border-radius: 10px;
- 
+    padding: 10px 25px;
+    text-align: left;
 }
 
 .card-right,
@@ -151,60 +132,23 @@ white: #ffffde
     padding-right: 20px;
 }
 
-.new-post-form {
-    -webkit-flex-direction: column;
-    -moz-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-align-items: center;
-    align-items: center;
-    background: #372D3B;
-    z-index: 10;
+.flex-item a {
+    text-align: left;
 }
 
+.flex-item-flipped a {
+    text-align: right;
+}
 
 /*600px and above */
-
 @media only screen and (min-width: 760px) {
-
-/* Pseudo Element timeline line */
-
-    .flex-item.flex-item-flipped h4 {
-        text-align: right;
-        padding-right: 15px;
-    }
-    .new-post-form {
-        position: fixed;
-        top: 100px;
-        width: 100%;
-    }
-    #post-form {
-        padding-top: 20px;
-        padding-bottom: 20px;
-    }
-    #post-form .form-row {
-        min-width: 100px;
-        -webkit-justify-content: flex-end;
-        -moz-justify-content: flex-end;
-        -ms-justify-content: flex-end;
-        justify-content: flex-end;
-    }
-    #caption-label {
-        text-align: right;
-        padding-right: 30px;
-        width: 100px;
-    }
-
-    #submitPost {
-        min-width: 100px;;
-    }
+      /* Pseudo Element timeline line */
     .feed-section {
         position: relative;
         z-index: 1;
         background: #D94362;
         max-width: 760px;
     }
-
     .feed-section:before,
     .feed-section:after {
         content: "";
@@ -217,30 +161,32 @@ white: #ffffde
         width: 378px;
         background: #372D3B;
     }
-
     .feed-section:after {
         left: 382px;
         width: 378px;
         background: #372D3B;
     }
-
     .flex-item {
         border: none;
     }
-
     .flex-item-hidden,
     .flex-item-content {
         width: 50%;
     }
+
     .flex-item-content {
-        text-align: left;
+        border-radius: 10px;
+        background: #FFFFDE;
+        color: #372D3B;
+    }
+    .move-up {
+        margin-top: -150px;
     }
     .flex-item-flipped .flex-item-content {
         -webkit-order: 1;
         -moz-order: 1;
         -ms-order: 1;
         order: 1;
-        text-align: right;
     }
     .flex-item-flipped .flex-item-hidden {
         -webkit-order: 3;
@@ -248,7 +194,6 @@ white: #ffffde
         -ms-order: 3;
         order: 3;
     }
-
     .flex-item-date {
         display: flex;
         -webkit-flex-basis: 100px;
@@ -273,72 +218,6 @@ white: #ffffde
     }
     .postImage {
         width: 80%;
-    }
-    .postCaption {
-        padding-top: 20px;
-        z-index: 5;
-        opacity: 0;
-        background: rgba(0, 0, 0, 0.9);
-    }
-    
-    .show-caption {
-        position: absolute;
-        font-size: 50px;
-        bottom: 46px;
-        left: 35px;
-        height: 30px;
-        width: 30px;
-        -webkit-transition: color 300ms;
-        -moz-transition: color 300ms;
-        -ms-transition: color 300ms;
-        transition: color 300ms;
-    }
-
-    .show-caption:hover {
-        color: #EC7263;
-        cursor: pointer;
-    }
-
-    /* .card-right .postCaption {
-        padding-left: 30px;
-        margin-left: 15px;
-    }
-    
-    .card-left .postCaption {
-        padding-right: 30px;
-        margin-left: 67px;
-    } */
-    
-    .card-right .show-caption {
-        left: 6px;
-  
-    }
-
-    .card-right .postCaption {
-        margin-left: 5px;
-        padding-left: 30px;
-    }
-
-    .card-left .postCaption {
-        margin-left: 90px;
-        padding-right: 30px;
-    }
-    
-    .card-left .show-caption {
-        right: 6px;
-        left: initial;
-    }
-    .card-left,
-    .card-right {
-        padding-left: 0;
-        padding-right: 0;
-    }
-
-    .card-right {
-        text-align: left;
-    }
-    .card-left {
-        text-align: right;
     }
 }
 

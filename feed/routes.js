@@ -1,5 +1,4 @@
 //feed routes
-
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
@@ -10,10 +9,13 @@ const { FeedPost } = require('./models');
 
 const { S3_BUCKET } = require('../config');
 
-aws.config.region='us-east-1';
+aws.config.region = 'us-east-1';
 
 router.get('/sign-s3', (req, res) => {
-    const s3 = new aws.S3();
+    const s3 = new aws.S3({
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+    });
     const fileName = req.query['file-name'];
     const fileType = req.query['file-type'];
     const s3Params = {
@@ -25,7 +27,7 @@ router.get('/sign-s3', (req, res) => {
     };
 
     s3.getSignedUrl('putObject', s3Params, (err, data) => {
-        if(err) {
+        if (err) {
             console.log(err);
             return res.end();
         }
@@ -48,7 +50,7 @@ router.get('/', (req, res) => {
         })
         .catch(error => {
             console.error(error);
-            res.status(500).json({error: 'something went wrong'});
+            res.status(500).json({ error: 'something went wrong' });
         });
 });
 
@@ -56,44 +58,42 @@ router.get('/:id', (req, res) => {
     User
         .findById(req.params.id)
         .then(user => {
-            if(user) {
+            if (user) {
                 FeedPost
-                    .find({user : req.params.id})
+                    .find({ user: req.params.id })
                     .populate('user')
                     .then(posts => {
                         res.status(201).json(posts.map(post => post.serialize()));
                     })
                     .catch(err => {
                         console.error(err);
-                        res.status(500).json({error: 'Something went wrong get Posts by ID'});
+                        res.status(500).json({ error: 'Something went wrong get Posts by ID' });
                     });
             } else {
                 const message = 'User not found';
                 console.error(message);
-                return res.status(400).send(message);
+                return res.status(400).json({error: message});
             };
         })
         .catch(err => {
             console.error(err);
-            res.status(400).json({error: 'Something went wrong: GET posts by user ID'});
+            res.status(400).json({ error: 'Something went wrong: GET posts by user ID' });
         });
 });
 
 router.post('/', (req, res) => {
-    //user is person logged in: req.user has info about use who is logged in
     const requiredFields = ['image'];
-    for(let i=0; i<requiredFields.length; i++) {
+    for (let i = 0; i < requiredFields.length; i++) {
         const field = requiredFields[i];
-        if(!(field in req.body)) {
+        if (!(field in req.body)) {
             const message = `Missing \'${field}\' in request body`;
             console.error(message);
-            return res.status(400).send(message);
+            return res.status(400).json({error: message});
         }
     };
 
     const now = new Date();
-    //validate file uploaded and change name of file
-    const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate()); 
+    const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
     FeedPost
         .findOne({
@@ -101,32 +101,32 @@ router.post('/', (req, res) => {
             created: { $gte: startOfToday }
         })
         .then(post => {
-            if(post) {
-                res.status(400).json({error: 'Already posted today'});
-                return 
+            if (post) {
+                res.status(400).json({ error: 'Already posted today' });
+                return
             }
-            return FeedPost   
-                    .findOneAndUpdate({_id: new mongoose.Types.ObjectId()}, {
-                        user: req.user.id,
-                        image: req.body.image,
-                        caption: req.body.caption,
-                        created: Date.now()
-                    }, {upsert: true, new: true})
-                    .populate('user')
+            return FeedPost
+                .findOneAndUpdate({ _id: new mongoose.Types.ObjectId() }, {
+                    user: req.user.id,
+                    image: req.body.image,
+                    caption: req.body.caption,
+                    created: Date.now()
+                }, { upsert: true, new: true })
+                .populate('user')
         })
         .then(feedPost => {
-            if(feedPost) {
-            res.status(201).json(feedPost.serialize())
+            if (feedPost) {
+                res.status(201).json(feedPost.serialize())
             }
         })
         .catch(err => {
             console.error(err);
-            res.status(400).json({error: 'Something went wrong: POST User'});
+            res.status(400).json({ error: 'Something went wrong: POST User' });
         });
 });
 
 router.put('/:id', (req, res) => {
-    if(!(req.params.id && req.body.id && req.params.id === req.body.id)) {
+    if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
         res.status(400).json({
             error: 'Request path ID and request body ID values must match'
         });
@@ -138,7 +138,7 @@ router.put('/:id', (req, res) => {
         if (field in req.body) {
             updated[field] = req.body[field];
         } else {
-            res.status(400).json({error: `Cannot update \'${field}\'`});
+            res.status(400).json({ error: `Cannot update \'${field}\'` });
         };
     });
 
@@ -148,7 +148,7 @@ router.put('/:id', (req, res) => {
         .then(updatedPost => res.status(201).json(updatedPost.serialize()))
         .catch(err => {
             console.error(err);
-            res.status(400).json({message: 'Something went wrong: PUT FeedPost'});
+            res.status(400).json({ message: 'Something went wrong: PUT FeedPost' });
         });
 });
 
@@ -156,11 +156,11 @@ router.delete('/:id', (req, res) => {
     FeedPost
         .findByIdAndRemove(req.params.id)
         .then(() => {
-            res.status(204).json({ message: 'success'})
+            res.status(204).json({ message: 'success' })
         })
         .catch(err => {
             console.error(err);
-            res.status(500).json({ error: 'something went wrong: DELETE FeedPost'})
+            res.status(500).json({ error: 'something went wrong: DELETE FeedPost' })
         });
 });
 

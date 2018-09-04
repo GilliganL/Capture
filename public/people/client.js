@@ -13,6 +13,9 @@ function listenForSubmitForm() {
         let state = $('#state').val().trim();
         let email = $('#email').val().trim();
 
+        $('#upload-label').text('Ready');
+        $('#upload-label').css('color', '#372D3B');
+
         $.ajax({
             url: `/api/users/myuser`,
             headers: {
@@ -109,8 +112,8 @@ function getPeople(callback) {
 
 function displayPeople(data) {
     for (index in data) {
-            $('.list-container').append(
-                `<li class='user-row'>
+        $('.list-container').append(
+            `<li class='user-row'>
                     <div class='user-left'>
                         <a class='get-user-posts' href=# data-id="${data[index].id}"><img src='${data[index].image}' alt='${data[index].fullName}'s picture' class='profile-pic'></a>
                     </div>

@@ -265,11 +265,11 @@ describe('Feed Post API resource', function () {
             let delPost
             return FeedPost
                 .findOne()
-                .then(function(post) {
+                .then(function (post) {
                     delPost = post
                     return chai.request(app)
-                    .delete(`/api/feed/${delPost.id}`)
-                    .set('authorization', `Bearer ${token}`)
+                        .delete(`/api/feed/${delPost.id}`)
+                        .set('authorization', `Bearer ${token}`)
                 })
                 .then(function (res) {
                     expect(res).to.have.status(204);
@@ -281,29 +281,27 @@ describe('Feed Post API resource', function () {
                 });
         });
     });
+ 
+    describe('S3 endpoint', function() {
+        it('should return an image URL', function() {
+            let s3Data = {
+                fileName: 'test.png',
+                fileType: 'image/png'
+            }
 
-    // S3 test passes when run locally but timesout in Travis. As an 'extra' for this project
-    //I will turn it in without this working in Travis. 
-    // describe('S3 endpoint', function() {
-    //     it('should return an image URL', function() {
-    //         let s3Data = {
-    //             fileName: 'test.png',
-    //             fileType: 'image/png'
-    //         }
+            return chai.request(app)
+                .get(`/api/feed/sign-s3?file-name=${s3Data.fileName}&file-type=${s3Data.fileType}`)
+                .set('Authorization', `Bearer ${token}`)
+                .then(function(res) {
+                    let response = JSON.parse(res.text);
+                    expect(res).to.have.status(200);
+                    expect(response).to.be.a('object');
+                    expect(response).to.include.keys(
+                        'signedRequest', 'url');
+                })  
 
-    //         return chai.request(app)
-    //             .get(`/api/feed/sign-s3?file-name=${s3Data.fileName}&file-type=${s3Data.fileType}`)
-    //             .set('Authorization', `Bearer ${token}`)
-    //             .then(function(res) {
-    //                 let response = JSON.parse(res.text);
-    //                 expect(res).to.have.status(200);
-    //                 expect(response).to.be.a('object');
-    //                 expect(response).to.include.keys(
-    //                     'signedRequest', 'url');
-    //             })
-               
-    //     });
-    // });
+        });
+    });
 });
 
 

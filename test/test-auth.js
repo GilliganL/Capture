@@ -55,8 +55,8 @@ describe('auth API resource', function () {
         return closeServer();
     });
 
-    describe('Login enpoint', function() {
-        it('Should request with no credentials', function() {
+    describe('Login enpoint', function () {
+        it('Should request with no credentials', function () {
             return chai.request(app)
                 .post('/api/auth/login')
                 .then((res) => {
@@ -64,29 +64,29 @@ describe('auth API resource', function () {
                 });
         });
 
-        it('Should reject an incorrect username', function() {
+        it('Should reject an incorrect username', function () {
             return chai.request(app)
                 .post('/api/auth/login')
-                .send({username: 'fakeusername', password })
+                .send({ username: 'fakeusername', password })
                 .then((res) => {
                     expect(res).to.have.status(401);
                 });
         });
 
-        it('Should reject an incorrect password', function() {
+        it('Should reject an incorrect password', function () {
             return chai.request(app)
                 .post('/api/auth/login')
-                .send({username, password: '12341345'})
+                .send({ username, password: '12341345' })
                 .then((res) => {
                     expect(res).to.have.status(401);
                 });
         });
 
-        it('Should return a valid token', function() {
+        it('Should return a valid token', function () {
             return chai.request(app)
                 .post('/api/auth/login')
-                .send({username, password})
-                .then(function(res) {
+                .send({ username, password })
+                .then(function (res) {
                     expect(res).to.have.status(200);
                     expect(res.body).to.be.a('object')
                     let token = res.body.authToken;
@@ -97,17 +97,17 @@ describe('auth API resource', function () {
                     expect(payload.user.username).to.equal(username);
                     expect(payload.user.fullName).to.equal(fullName);
                     expect(payload.user.location).to.equal(location);
-                }); 
-            
+                });
+
         });
     });
 
-    describe('Logout endpoint', function() {
-        it('should log the user out', function() {
+    describe('Logout endpoint', function () {
+        it('should log the user out', function () {
 
             return chai.request(app)
                 .get('/api/auth/logout')
-                .then(function(res) {
+                .then(function (res) {
                     expect(res).to.have.status(200);
                 });
         });

@@ -15,32 +15,32 @@ const { TEST_DATABASE_URL } = require('../config');
 chai.use(chaiHttp);
 
 //Test Static Assets
-describe('Static assets', function() {
-    it('GET to / should return status 200 and html', function() {
+describe('Static assets', function () {
+    it('GET to / should return status 200 and html', function () {
         return chai.request(app)
             .get('/')
-            .then(function(res) {
+            .then(function (res) {
                 expect(res).to.have.status(200);
                 expect(res).to.be.html;
             });
     });
 
-    it('GET to /feed should return status 200 and html', function() {
+    it('GET to /feed should return status 200 and html', function () {
         return chai.request(app)
-        .get('/feed')
-        .then(function(res) {
-            expect(res).to.have.status(200);
-            expect(res).to.be.html;
-        });
+            .get('/feed')
+            .then(function (res) {
+                expect(res).to.have.status(200);
+                expect(res).to.be.html;
+            });
     });
 
-    it('GET to /people should return status 200 and html', function() {
+    it('GET to /people should return status 200 and html', function () {
         return chai.request(app)
-        .get('/people')
-        .then(function(res) {
-            expect(res).to.have.status(200);
-            expect(res).to.be.html;
-        });
+            .get('/people')
+            .then(function (res) {
+                expect(res).to.have.status(200);
+                expect(res).to.be.html;
+            });
     });
 });
 

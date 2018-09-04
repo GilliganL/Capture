@@ -19,27 +19,27 @@ router.post('/', (req, res) => {
         if (!(field in req.body)) {
             const message = `Missing \'${field} \' in request body`;
             console.error(message);
-            return res.status(400).send(message);
+            return res.status(400).json({error: message});
         }
     };
 
     if (!(validator.isEmail(req.body.email))) {
         const message = `Please enter a valid email address`;
         console.error(message);
-        return res.status(400).send(message);
+        return res.status(400).json({error: message});
     };
 
     if (!(validator.isAlphanumeric(req.body.username)) || (req.body.username.trim() !== req.body.username)) {
         const message = 'Please use letters and numbers only in username';
         console.error(message);
-        return res.status(400).send(message);
+        return res.status(400).json({error: message});
     }
 
-    if(!(passwordSchema.validate(req.body.password))) {
-        const failed = passwordSchema.validate(req.body.password, { list: true});
+    if (!(passwordSchema.validate(req.body.password))) {
+        const failed = passwordSchema.validate(req.body.password, { list: true });
         let message = 'Password does not meet requirements';
         console.error(message);
-        return res.status(400).send(message);
+        return res.status(400).json({error: message});
     }
 
     User
@@ -48,7 +48,7 @@ router.post('/', (req, res) => {
             if (user) {
                 const message = 'username not available';
                 console.error(message);
-                return res.status(400).send(message);
+                return res.status(400).json({error: message});
             }
             return User.hashPassword(req.body.password);
         })
@@ -75,7 +75,7 @@ router.use(jwtAuth);
 
 router.get('/', (req, res) => {
     User
-        .find({ _id: { $ne: req.user.id }})
+        .find({ _id: { $ne: req.user.id } })
         .then(users => {
             res.status(200).json(users.map(user => user.serialize()));
         })
@@ -86,7 +86,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  
+
     User
         .findById(req.user.id)
         .then(user => res.status(201).json(user.serialize()))
@@ -96,7 +96,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
-router.put('/:id', (req, res) => { 
+router.put('/:id', (req, res) => {
 
     const updated = {
         firstName: req.body.firstName,
@@ -105,11 +105,11 @@ router.put('/:id', (req, res) => {
         state: req.body.state
     };
 
-    if(req.body.email) {
+    if (req.body.email) {
         if (!(validator.isEmail(req.body.email))) {
             const message = `Please enter a valid email address`;
             console.error(message);
-            return res.status(400).send(message);
+            return res.status(400).json({error: message});
         } else {
             updated.email = req.body.email;
         };

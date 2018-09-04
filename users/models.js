@@ -17,31 +17,31 @@ const userSchema = mongoose.Schema({
         required: true
     },
     password: { type: String, required: true },
-    city: {type: String, required: true, index: true},
-    state: {type: String, required: true, maxLength: 2, index: true},
-    email: {type: String, required: true},
-    image: {type: String, required: true, default: '/images/preview-avatar.png'}
+    city: { type: String, required: true, index: true },
+    state: { type: String, required: true, maxLength: 2, index: true },
+    email: { type: String, required: true },
+    image: { type: String, required: true, default: '/images/preview-avatar.png' }
 });
 
 const passwordSchema = new passwordValidator();
 
 passwordSchema
-.is().min(8)
-.is().max(72)
-.has().uppercase()
-.has().lowercase()
-.has().digits()
-.has().not().spaces()
+    .is().min(8)
+    .is().max(72)
+    .has().uppercase()
+    .has().lowercase()
+    .has().digits()
+    .has().not().spaces()
 
-userSchema.virtual('fullName').get(function() {
+userSchema.virtual('fullName').get(function () {
     return `${this.firstName} ${this.lastName}`.trim();
 });
 
-userSchema.virtual('location').get(function() {
+userSchema.virtual('location').get(function () {
     return `${this.city}, ${this.state}`.trim();
 });
 
-userSchema.methods.serialize = function() {
+userSchema.methods.serialize = function () {
     return {
         id: this._id,
         fullName: this.fullName,
@@ -51,13 +51,13 @@ userSchema.methods.serialize = function() {
     };
 };
 
-userSchema.methods.validatePassword = function(password) {
+userSchema.methods.validatePassword = function (password) {
     return bcrypt.compare(password, this.password);
-  };
-  
-  userSchema.statics.hashPassword = function(password) {
+};
+
+userSchema.statics.hashPassword = function (password) {
     return bcrypt.hash(password, 10);
-  };
+};
 
 const User = mongoose.model('User', userSchema);
 

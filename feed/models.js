@@ -5,20 +5,20 @@ mongoose.Promise = global.Promise;
 
 const feedPostSchema = mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    image: {type: String},
-    caption: {type: String},
-    created: {type: Date, default: Date.now}
+    image: { type: String },
+    caption: { type: String },
+    created: { type: Date, default: Date.now }
 });
 
-feedPostSchema.virtual('fullName').get(function() {
+feedPostSchema.virtual('fullName').get(function () {
     return `${this.user.firstName} ${this.user.lastName}`.trim();
 });
 
-feedPostSchema.virtual('location').get(function() {
+feedPostSchema.virtual('location').get(function () {
     return `${this.user.city}, ${this.user.state}`.trim();
 });
 
-feedPostSchema.methods.serialize = function() {
+feedPostSchema.methods.serialize = function () {
     return {
         id: this._id,
         user: this.fullName,
@@ -29,7 +29,7 @@ feedPostSchema.methods.serialize = function() {
     };
 };
 
-feedPostSchema.pre('findById', function(next) {
+feedPostSchema.pre('findById', function (next) {
     this.populate('user');
     next();
 });

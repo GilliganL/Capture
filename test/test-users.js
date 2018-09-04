@@ -51,7 +51,7 @@ const state = 'CO';
 const city = 'Denver';
 let userId;
 
-let token; 
+let token;
 
 describe('User API resource', function () {
 
@@ -61,36 +61,36 @@ describe('User API resource', function () {
 
     beforeEach(function () {
         return SeedUserData()
-        .then(() => User.hashPassword(password))
-        .then(password =>
-            User.create({
-                username,
-                password,
-                firstName,
-                lastName,
-                email,
-                city,
-                state
-        
-            })
-        )
-        .then((user) => {
-            userId = user._id;
-        token = jwt.sign({
-            user: {
-                username,
-                firstName,
-                lastName,
-                id: user._id
-            }
-        },
-            JWT_SECRET,
-            {
-                algorithm: 'HS256',
-                subject: username,
-                expiresIn: '7d'
-            })
-        });
+            .then(() => User.hashPassword(password))
+            .then(password =>
+                User.create({
+                    username,
+                    password,
+                    firstName,
+                    lastName,
+                    email,
+                    city,
+                    state
+
+                })
+            )
+            .then((user) => {
+                userId = user._id;
+                token = jwt.sign({
+                    user: {
+                        username,
+                        firstName,
+                        lastName,
+                        id: user._id
+                    }
+                },
+                    JWT_SECRET,
+                    {
+                        algorithm: 'HS256',
+                        subject: username,
+                        expiresIn: '7d'
+                    })
+            });
     });
 
     afterEach(function () {
@@ -115,7 +115,7 @@ describe('User API resource', function () {
                     return User.count();
                 })
                 .then(function (count) {
-                    expect(res.body).to.have.lengthOf(count-1);
+                    expect(res.body).to.have.lengthOf(count - 1);
                 });
         });
 
@@ -167,8 +167,8 @@ describe('User API resource', function () {
                     expect(resUser.location).to.equal(user.location);
                     expect(resUser.username).to.equal(user.username);
                 });
-    
-            });
+
+        });
     });
 
     describe('POST endpoint', function () {
@@ -190,7 +190,7 @@ describe('User API resource', function () {
                     return User.findById(res.body.id);
                 })
                 .then(function (user) {
-                
+
                     expect(user.firstName).to.equal(newUser.firstName);
                     expect(user.lastName).to.equal(newUser.lastName);
                     expect(user.username).to.equal(newUser.username.toLowerCase());
@@ -203,33 +203,33 @@ describe('User API resource', function () {
 
     describe('PUT endpoint', function () {
         it('should update fields sent over', function () {
-                const updateData = {
-                    firstName: 'Charlie',
-                    lastName: 'Kelly',
-                    city: 'Philadelphia',
-                    state: 'PA',
-                    email: 'charlie@paddyspub.com',
-                    image: '/images/preview-avatar.png'
-                };
+            const updateData = {
+                firstName: 'Charlie',
+                lastName: 'Kelly',
+                city: 'Philadelphia',
+                state: 'PA',
+                email: 'charlie@paddyspub.com',
+                image: '/images/preview-avatar.png'
+            };
 
-                return chai.request(app)
-                    .put(`/api/users/${userId}`)
-                    .set('authorization', `Bearer ${token}`)
-                    .send(updateData)
-                    .then(function (res) {
-                        expect(res).to.have.status(201);
-                        return User.findById(userId);
-                    })
-                    .then(function (user) {
-                        expect(updateData.firstName).to.equal(user.firstName);
-                        expect(updateData.lastName).to.equal(user.lastName);
-                        expect(updateData.city).to.equal(user.city);
-                        expect(updateData.state).to.equal(user.state);
-                        expect(updateData.email).to.equal(user.email);
-                    });
-            });
+            return chai.request(app)
+                .put(`/api/users/${userId}`)
+                .set('authorization', `Bearer ${token}`)
+                .send(updateData)
+                .then(function (res) {
+                    expect(res).to.have.status(201);
+                    return User.findById(userId);
+                })
+                .then(function (user) {
+                    expect(updateData.firstName).to.equal(user.firstName);
+                    expect(updateData.lastName).to.equal(user.lastName);
+                    expect(updateData.city).to.equal(user.city);
+                    expect(updateData.state).to.equal(user.state);
+                    expect(updateData.email).to.equal(user.email);
+                });
         });
-   
+    });
+
 
     describe('DELETE endpoint', function () {
         it('should delete a user by id', function () {
