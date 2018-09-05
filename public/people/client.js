@@ -40,8 +40,10 @@ function listenForEditProfile() {
         $('.edit-profile-section').toggleClass('hidden');
 
         if ($('.edit-profile-section').hasClass('hidden')) {
+            $('.edit-profile-section').prop('hidden', true);
             $(this).html('Edit Profile');
         } else {
+            $('.edit-profile-section').prop('hidden', false);
             $(this).html('Close');
         }
     });
@@ -66,7 +68,7 @@ function displayProfile(data) {
     if ($('.edit-profile-section').hasClass('hidden')) {
         $('.profile-container').append(
             `<div class='profile-image'>
-            <img class='profile-pic' src='${data.image}'>
+            <img class='profile-pic' src='${data.image}' alt='profile picture of ${data.fullName}'>
         </div>
         <div class='profile-data'>
             <p class='username-p'><b>${data.username}</b></p>
@@ -78,7 +80,7 @@ function displayProfile(data) {
     } else {
         $('.profile-container').append(
             `<div class='profile-image'>
-                <img class='profile-pic' src='${data.image}'>
+                <img class='profile-pic' src='${data.image}' alt='profile picture of ${data.fullName}'>
             </div>
             <div class='profile-data'>
                 <p class='username-p'><b>${data.username}</b></p>
@@ -115,7 +117,7 @@ function displayPeople(data) {
         $('.list-container').append(
             `<li class='user-row'>
                     <div class='user-left'>
-                        <a class='get-user-posts' href=# data-id="${data[index].id}"><img src='${data[index].image}' alt='${data[index].fullName}'s picture' class='profile-pic'></a>
+                        <img src='${data[index].image}' alt='${data[index].fullName}'s profile picture' class='profile-pic'>
                     </div>
                     <div class='user-right'>
                         <p class='username-p'><b>${data[index].username}</b></p>

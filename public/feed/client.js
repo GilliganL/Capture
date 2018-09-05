@@ -4,8 +4,10 @@ function listenForNewPost() {
         $('.new-post-form').toggleClass('hidden');
 
         if ($('.new-post-form').hasClass('hidden')) {
+            $('.new-post-form').prop('hidden', true);
             $('#new-post').html('<h3>New Post</h3>');
         } else {
+            $('.new-post-form').prop('hidden', false);
             $('#new-post').html('<h3>Close</h3>');
         }
     });
@@ -71,8 +73,8 @@ function displayFeedPosts(data) {
                     <div class='flex-item-date' id='flex-item-date-0'>
                     <div class='line-right'></div></div>
                     <div class='flex-item-content'>
-                        <a class='getById' href=# data-id="${data[index].userId}"><h4 class='poster'> ${data[index].user}</h4></a>
-                        <img class='postImage' src="${data[index].image}">
+                        <h4 class='poster'> ${data[index].user}</h4>
+                        <img class='postImage' src="${data[index].image}" alt='${data[index].caption}'>
                         <div class='postCaption'><p>${data[index].caption}</p></div>
                     </div>
                 </div>`);
@@ -83,8 +85,8 @@ function displayFeedPosts(data) {
                     <div class='flex-item-date'>
                     <div class='line-right'></div></div>
                     <div class='flex-item-content'>
-                        <a class='getById' href=# data-id="${data[index].userId}"><h4 class='poster'> ${data[index].user}</h4></a>
-                        <img class='postImage' src="${data[index].image}">
+                        <h4 class='poster'> ${data[index].user}</h4>
+                        <img class='postImage' src="${data[index].image}" alt='${data[index].caption}'>
                         <div class='postCaption'><p>${data[index].caption}</p></div>
                     </div>
                 </div>`);
@@ -95,8 +97,8 @@ function displayFeedPosts(data) {
                     <div class='flex-item-date'>
                     <div class='line-left'></div></div>
                     <div class='flex-item-content'>
-                        <a class='getById' href=# data-id="${data[index].userId}"><h4 class='poster'> ${data[index].user}</h4></a>
-                        <img class='postImage' src="${data[index].image}">
+                        <h4 class='poster'> ${data[index].user}</h4>
+                        <img class='postImage' src="${data[index].image}" alt='${data[index].caption}'>
                         <div class='postCaption'><p>${data[index].caption}</p></div>
                     </div>
                 </div>`);
