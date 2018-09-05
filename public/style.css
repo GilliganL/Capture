@@ -89,6 +89,8 @@ a {
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     -webkit-align-items: baseline;
+    -moz-align-items: baseline;
+    -ms-align-items: baseline;
     align-items: baseline;
     -webkit-justify-content: space-evenly;
     -moz-justify-content: space-evenly;
@@ -206,6 +208,10 @@ form {
     width: 100%;
     padding: 0 10px;
     margin: 0;
+    list-style: none;
+}
+
+.form-row {
     list-style: none;
 }
 

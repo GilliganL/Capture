@@ -5,10 +5,10 @@ function listenForNewPost() {
 
         if ($('.new-post-form').hasClass('hidden')) {
             $('.new-post-form').prop('hidden', true);
-            $('#new-post').html('<h3>New Post</h3>');
+            $('#new-post-h3').html('New Post');
         } else {
             $('.new-post-form').prop('hidden', false);
-            $('#new-post').html('<h3>Close</h3>');
+            $('#new-post-h3').html('Close');
         }
     });
 }
