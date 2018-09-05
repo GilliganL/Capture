@@ -9,7 +9,8 @@
     <title>Postcard - Timeline</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
     <link rel='stylesheet' type='text/css' href='style.css'>
     <link rel='stylesheet' type='text/css' href='../style.css'>
 </head>
@@ -17,10 +18,12 @@
 <body>
     <nav role='navigation' class='nav-bar'>
         <div class='nav-container'>
-            <div class='nav-link' id='new-post' aria-live='assertive'>
-                <h3>New Post</h3>
+            <div class='nav-link' id='new-post'>
+                <a href='#' aria-live='assertive'>
+                    <h3>New Post</h3>
+                </a>
             </div>
-            <div class='nav-link' id='logo'>
+            <div class='nav-link' id='logo' role='logo'>
                 <a href='/feed/' aria-live='assertive'>
                     <h1>Postcard</h1>
                 </a>
@@ -48,7 +51,7 @@
                         <textarea maxlength='300' rows='4' cols='75' wrap='hard' id='caption' name='caption' placeholder='250 characters maximum'></textarea>
                     </li>
                     <li class='form-row file-row'>
-                        <label for='uploadPhoto' id='upload-label'><i class="fas fa-upload"></i> Upload a Photo</label>
+                        <label role='button' for='uploadPhoto' id='upload-label'aria-live='assertive'><i class="fas fa-upload"></i> Upload a Photo</label>
                     </li>
                     <li class='form-row' id='hidden-post-row'>
                         <input type='file' class='input-file uploadPhoto' id='uploadPhoto' name='uploadPhoto' accept='image/*' placeholder='Choose a file...'>

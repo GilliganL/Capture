@@ -291,6 +291,10 @@ textarea {
     flex: none;
 }
 
+#upload-label:active {
+    color: white;
+}
+
 .file-row {
     -webkit-justify-content: center;
     -moz-justify-content: center;
