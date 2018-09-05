@@ -127,10 +127,15 @@ a {
     flex-grow: 1;
 }
 
-#logout {
+#logout,
+#demo {
     position: absolute;
     top: 10px;
     right: -60px;
+}
+
+#demo {
+    right: -40px;
 }
 
 #people a:hover,
@@ -153,53 +158,45 @@ a {
     height: 360px;
     width: 100%;
     background: url('https://images.pexels.com/photos/265946/pexels-photo-265946.jpeg') center center no-repeat;
+    box-shadow: inset 0 0 0 1000px rgba(55, 45, 59, .6);
     background-size: cover;
     z-index: -1;
 }
 
-.landing-page:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-image: linear-gradient( #372D3B, #372D3B);
-    opacity: .7;
-    z-index: -1;
-  }
+.landing-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    text-align: center;
+    width: 100%;
+    max-width: 960px;
+}
 
-  .landing-info {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      text-align: center;
-      width: 100%;
-      max-width: 960px;
-  }
-
-  .landing-info h2 {
+.landing-info h2 {
     font-size: 30px;
-  }
+}
 
-  .landing-info p {
-      padding: 20px 0;
-  }
+.landing-info p {
+    padding: 20px;
+    font-size: 18px;
+    letter-spacing: .4px;
+}
 
-  #demo-button {
-      color: #FFFFDE;
-      text-shadow: 1px 1px 1px black;
-  }
+#demo-button {
+    color: #FFFFDE;
+}
 
-  .landing-info #demo-button:hover {
-      text-shadow: initial;
-  }
+#demo-button:hover {
+    color: #D94362;
+    text-shadow: initial;
+}
 
-  .landing-text {
-      font-weight: bold;
-      color: #FFFFDE;
-      text-shadow: 2px 2px 2px black;
-  }
+.landing-text {
+    font-weight: bold;
+    color: #FFFFDE;
+    text-shadow: 2px 2px 2px black;
+}
+
 form {
     width: 100%;
     max-width: 640px;
@@ -410,8 +407,6 @@ footer p {
     margin: 5px;
 }
 
-/* login page styles */
-
 .forms-container {
     display: flex;
     -webkit-flex-wrap: wrap;
@@ -478,17 +473,18 @@ legend {
 }
 
 /*Getting Smaller Screens less than 1030px */
-
 @media only screen and (max-width: 1030px) {
-    #logout {
+    #logout,
+    #demo {
         top: 12px;
         right: -58px;
-        /* position: static; */
+    }
+    #demo {
+        right: -38px;
     }
 }
 
 /*Screens less than 600px*/
-
 @media only screen and (max-width: 600px) {
     main {
         padding-top: 0;
@@ -521,6 +517,16 @@ legend {
         min-width: 250px;
     }
     #logout {
+        -webkit-order: 2;
+        -moz-order: 2;
+        -ms-order: 2;
+        order: 2;
+        margin: 10px 0;
+        position: relative;
+        top: 0;
+        right: 0;
+    }
+    #demo {
         -webkit-order: 3;
         -moz-order: 3;
         -ms-order: 3;
@@ -533,10 +539,10 @@ legend {
     #feed,
     #people,
     #new-post {
-        -webkit-order: 2;
-        -moz-order: 2;
-        -ms-order: 2;
-        order: 2;
+        -webkit-order: 3;
+        -moz-order: 3;
+        -ms-order: 3;
+        order: 3;
         text-align: center;
         min-width: 250px;
     }
@@ -546,5 +552,17 @@ legend {
         -ms-order: 4;
         order: 4;
         margin-top: 20px;
+    }
+    .landing-page {
+        height: 500px;
+    }
+    .landing-page p {
+        padding: 10px;
+    }
+}
+
+@media only screen and (max-width: 340px) {
+    .landing-page {
+        height: 600px;
     }
 }

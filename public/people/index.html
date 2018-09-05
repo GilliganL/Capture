@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-    <meta name='description' content='A social media site'>
+    <meta name='description' content='A social media site for true connection and meaningful content.'>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Postcard</title>
+    <title>Postcard - People</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -18,23 +18,23 @@
     <nav role='navigation' class='nav-bar'>
         <div class='nav-container'>
             <div class='nav-link' id='feed'>
-                <a href='/feed'>
+                <a href='/feed' aria-live='assertive'>
                     <h3>Timeline</h3>
                 </a>
             </div>
             <div class='nav-link' id='logo'>
-                <a href='/feed/'>
+                <a href='/feed/' aria-live='assertive'>
                     <h1>Postcard</h1>
                 </a>
             </div>
             <div class='nav-link' id='people'>
-                <a href='/people'>
+                <a href='/people' aria-live='assertive'>
                     <h3>People</h3>
                 </a>
             </div>
         </div>
         <div class='nav-link' id='logout'>
-            <button id='logout-button'>Logout</button>
+            <button role='button' id='logout-button' aria-live='assertive'>Logout</button>
         </div>
         <hr>
     </nav>
@@ -42,7 +42,7 @@
         <section class='profile'>
             <div class='profile-container'></div>
         </section>
-        <section class='edit-profile-section hidden'>
+        <section class='edit-profile-section hidden' aria-live='assertive'>
             <form class='profile-form'>
                 <ul class='form-wrapper'>
                     <li class='form-row'>
@@ -73,7 +73,7 @@
                         <input type='hidden' id='save-url' name='save-url' value=''>
                     </li>
                     <li class='form-row'>
-                        <button type='submit' id='submitPost' value='New post'>Submit</button>
+                        <button role='button' type='submit' aria-live='assertive'>Submit</button>
                     </li>
                 </ul>
             </form>

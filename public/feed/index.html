@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-    <meta name='description' content='A social media site'>
+    <meta name='description' content='A social media site for true connection and meaningful content.'>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Postcard</title>
+    <title>Postcard - Timeline</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -17,27 +17,27 @@
 <body>
     <nav role='navigation' class='nav-bar'>
         <div class='nav-container'>
-            <div class='nav-link' id='new-post'>
+            <div class='nav-link' id='new-post' aria-live='assertive'>
                 <h3>New Post</h3>
             </div>
             <div class='nav-link' id='logo'>
-                <a href='/feed/'>
+                <a href='/feed/' aria-live='assertive'>
                     <h1>Postcard</h1>
                 </a>
             </div>
             <div class='nav-link' id='people'>
-                <a href='/people'>
+                <a href='/people' aria-live='assertive'>
                     <h3>People</h3>
                 </a>
             </div>
         </div>
         <div class='nav-link' id='logout'>
-            <button id='logout-button'>Logout</button>
+            <button role='button' id='logout-button' aria-live='assertive'>Logout</button>
         </div>
         <hr>
     </nav>
     <main role='main'>
-        <section class='new-post-form hidden'>
+        <section class='new-post-form hidden' aria-live='assertive'>
             <h2>Upload a Postcard</h2>
             <form id='post-form'>
                 <ul class='form-wrapper' id='post-form-wrapper'>
@@ -55,13 +55,13 @@
                         <input type='hidden' id='save-url' name='save-url' value=''>
                     </li>
                     <li class='form-row'>
-                        <button type='submit' id='submitPost' value='New post'>Post</button>
+                        <button role='button' type='submit' id='submitPost' value='New post' aria-live='assertive'>Post</button>
                     </li>
                 </ul>
             </form>
             <hr>
         </section>
-        <section class='feed-section flex-container'></section>
+        <section class='feed-section flex-container' aria-live='assertive'></section>
     </main>
     <hr>
     <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>

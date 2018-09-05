@@ -87,7 +87,7 @@ function listenForSignUpButton() {
 }
 
 function listenForDemoButton() {
-    $('.landing-info').on('click', '#demo-button', function(event) {
+    $('.nav-bar').on('click', '#demo-button', function(event) {
         event.preventDefault();
 
         console.log('view demo ran')

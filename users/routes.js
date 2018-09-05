@@ -98,12 +98,13 @@ router.get('/:id', (req, res) => {
 
 router.put('/:id', (req, res) => {
 
-    const updated = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        city: req.body.city,
-        state: req.body.state
-    };
+    const updated = {};
+    const updateFields = ['firstName', 'lastName', 'city', 'state', 'image'];
+    updateFields.forEach(field => {
+        if (req.body[field]) {
+            updated[field] = req.body[field];
+        }
+    })
 
     if (req.body.email) {
         if (!(validator.isEmail(req.body.email))) {
@@ -114,8 +115,6 @@ router.put('/:id', (req, res) => {
             updated.email = req.body.email;
         };
     }
-    //validate file type
-    updated.image = req.body.image;
 
     User
         .findByIdAndUpdate(req.user.id, { $set: updated }, { new: true })
