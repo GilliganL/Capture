@@ -86,8 +86,21 @@ function listenForSignUpButton() {
     });
 }
 
+function listenForDemoButton() {
+    $('.landing-info').on('click', '#demo-button', function(event) {
+        event.preventDefault();
+
+        console.log('view demo ran')
+        let username = 'lynsey';
+        let password = 'password';
+
+        login(username, password);
+    });
+}
+
 $(function () {
     listenForLogin();
     listenForSignUpButton();
     listenForLogoutButton();
+    listenForDemoButton();
 })

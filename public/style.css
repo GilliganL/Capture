@@ -26,7 +26,7 @@ body {
 
 main {
     width: 100%;
-    margin-top: 130px;
+    margin-top: 110px;
 }
 
 h1 {
@@ -147,10 +147,10 @@ a {
 
 .landing-page {
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: center;
     position: relative;
-    height: 400px;
+    height: 360px;
     width: 100%;
     background: url('https://images.pexels.com/photos/265946/pexels-photo-265946.jpeg') center center no-repeat;
     background-size: cover;
@@ -164,13 +164,41 @@ a {
     right: 0;
     bottom: 0;
     left: 0;
-    background-image: linear-gradient(to bottom right, #372D3B, #FEBE7E);
-    opacity: .6;
+    background-image: linear-gradient( #372D3B, #372D3B);
+    opacity: .7;
     z-index: -1;
   }
 
   .landing-info {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
       text-align: center;
+      width: 100%;
+      max-width: 960px;
+  }
+
+  .landing-info h2 {
+    font-size: 30px;
+  }
+
+  .landing-info p {
+      padding: 20px 0;
+  }
+
+  #demo-button {
+      color: #FFFFDE;
+      text-shadow: 1px 1px 1px black;
+  }
+
+  .landing-info #demo-button:hover {
+      text-shadow: initial;
+  }
+
+  .landing-text {
+      font-weight: bold;
+      color: #FFFFDE;
+      text-shadow: 2px 2px 2px black;
   }
 form {
     width: 100%;
@@ -336,7 +364,8 @@ button:focus {
     transition: background-color .2s;
 }
 
-button:hover {
+button:hover,
+.landing-info #demo-button:hover {
     cursor: pointer;
     background-color: #FFFFDE;
     border: 4px solid #FFFFDE;
