@@ -1,19 +1,19 @@
-#Postcard - A Social Media Site
-######Lynsey Powell
+# Postcard - A Social Media Site
+###### Lynsey Powell
 
-##Inspiration
-######A simple social media site that fosters true connection and meaningful content.
+## Inspiration
+###### A simple social media site that fosters true connection and meaningful content.
 I wanted to demonstrate the use of back-end technologies and have fun. I decided to build a social
 media site that I would enjoy.  
 
-##Demo
+## Demo
 Visit [Postcard](https://postcard-2018.herokuapp.com/).
 
-##Technologies
-Node, Express, MongoDB, S3, Mongoose, Passport, JWT, Heroku, Travis, mLab, REST APIs, Mocha, Chai,
+## Technologies
+Node, Express, MongoDB, AWS S3, Mongoose, Passport, JWT, Heroku, Travis, mLab, REST APIs, Mocha, Chai,
 Javascript, JQuery, CSS, HTML
 
-##Screenshots
+## Screenshots
 ![Landing Page](https://s3.amazonaws.com/postcard-photo-repo-dev/Screenshots/Landing.PNG)
 
 ![Login & Signup](https://s3.amazonaws.com/postcard-photo-repo-dev/Screenshots/login.PNG)
