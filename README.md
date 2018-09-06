@@ -1,8 +1,8 @@
 # Postcard - A Social Media Site
-###### Lynsey Powell
+###### A simple social media site that fosters true connection and meaningful content.
+## Lynsey Powell
 
 ## Inspiration
-###### A simple social media site that fosters true connection and meaningful content.
 I wanted to demonstrate the use of back-end technologies and have fun. I decided to build a social
 media site that I would enjoy.  
 
