@@ -141,7 +141,7 @@ a {
 }
 
 #people a:hover,
-#new-post:hover,
+#new-post a:hover,
 #logo a:hover,
 #feed a:hover {
     cursor: pointer;
@@ -150,6 +150,16 @@ a {
     -moz-transition: color .2s;
     -ms-transition: color .2s;
     transition: color .2s;
+}
+
+#people a:focus,
+#new-post a:focus,
+#logo a:focus,
+#feed a:focus {
+    color: #EC7263;
+    outline-color: #FFFFDE;
+    outline-width: 3px;
+    outline-offset: 5px;
 }
 
 .landing-page {
@@ -212,10 +222,6 @@ form {
 }
 
 .form-row {
-    list-style: none;
-}
-
-.form-row {
     display: flex;
     -webkit-flex-wrap: wrap;
     -moz-flex-wrap: wrap;
@@ -226,6 +232,14 @@ form {
     -ms-justify-content: flex-end;
     justify-content: flex-end;
     padding: 3px;
+    list-style: none;
+}
+
+.file-row {
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
 }
 
 .form-row>label,
@@ -276,7 +290,8 @@ textarea {
     border-radius: 5px;
 }
 
-.input-file {
+.uploadPhoto {
+    /* position: absolute; */
     width: 0.1px;
     height: 0.1px;
     opacity: 0;
@@ -295,17 +310,6 @@ textarea {
     -moz-flex: none;
     -ms-flex: none;
     flex: none;
-}
-
-#upload-label:active {
-    color: white;
-}
-
-.file-row {
-    -webkit-justify-content: center;
-    -moz-justify-content: center;
-    -ms-justify-content: center;
-    justify-content: center;
 }
 
 #upload-label:hover {
@@ -361,7 +365,8 @@ button {
     min-height: 24px;
 }
 
-button:focus {
+button:focus,
+#upload-label:focus {
     outline: none;
     box-shadow: 0 0 0 2px #FFFFDE;
     color: #FFFFDE;

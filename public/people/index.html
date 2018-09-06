@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class='nav-link' id='logout'>
-            <button role='button' id='logout-button' aria-live='assertive'>Logout</button>
+            <button role='button' tabindex='5' id='logout-button' aria-live='assertive'>Logout</button>
         </div>
         <hr>
     </nav>
@@ -44,7 +44,7 @@
         </section>
         <section class='edit-profile-section hidden' aria-live='assertive' hidden>
             <form class='profile-form'>
-                <ul class='form-wrapper'>
+                <ul class='form-wrapper' role='none'> 
                     <li class='form-row'>
                         <label for='firstName'>First Name</label>
                         <input type='text' id='firstName' name='first name' placeholder='First Name'>
@@ -66,11 +66,9 @@
                         <input type='text' id='email' name='email' placeholder='Email'>
                     </li>
                     <li class='form-row file-row'>
-                        <label role='button' for='uploadPhoto' id='upload-label' role='button' aria-live='assertive'><i class="fas fa-upload"></i> Profile Picture</label>
-                    </li>
-                    <li class='form-row'>
-                        <input type='file' class='input-file uploadPhoto' id='uploadPhoto' name='uploadPhoto' accept='image/*' placeholder='Choose a file...'>
                         <input type='hidden' id='save-url' name='save-url' value=''>
+                        <input type='file' tabindex='-1' class='uploadPhoto' id='uploadPhoto' name='uploadPhoto' accept='image/*' placeholder='Choose a file...'>
+                        <label role='button' tabindex='0' for='uploadPhoto' id='upload-label' role='button' aria-live='assertive'><i class="fas fa-upload"></i> Profile Picture</label>
                     </li>
                     <li class='form-row'>
                         <button role='button' type='submit' aria-live='assertive'>Submit</button>

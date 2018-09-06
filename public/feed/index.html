@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class='nav-link' id='logout'>
-            <button role='button' id='logout-button' aria-live='assertive'>Logout</button>
+            <button role='button' tabindex='5' id='logout-button' aria-live='assertive'>Logout</button>
         </div>
         <hr>
     </nav>
@@ -43,7 +43,7 @@
         <section class='new-post-form hidden' aria-live='assertive' hidden>
             <h2>Upload a Postcard</h2>
             <form id='post-form'>
-                <ul class='form-wrapper' id='post-form-wrapper'>
+                <ul class='form-wrapper' id='post-form-wrapper' role='none'>
                     <li class='form-row' id='caption-label'>
                         <label for='caption'>Caption</label>
                     </li>
@@ -51,11 +51,9 @@
                         <textarea maxlength='300' rows='4' cols='75' wrap='hard' id='caption' name='caption' placeholder='250 characters maximum'></textarea>
                     </li>
                     <li class='form-row file-row'>
-                        <label role='button' for='uploadPhoto' id='upload-label'aria-live='assertive'><i class="fas fa-upload"></i> Upload a Photo</label>
-                    </li>
-                    <li class='form-row' id='hidden-post-row'>
-                        <input type='file' class='input-file uploadPhoto' id='uploadPhoto' name='uploadPhoto' accept='image/*' placeholder='Choose a file...'>
                         <input type='hidden' id='save-url' name='save-url' value=''>
+                        <input type='file' tabindex='-1' class='uploadPhoto' id='uploadPhoto' name='uploadPhoto' accept='image/*' placeholder='Choose a file...'>
+                        <label role='button' tabindex='0' for='uploadPhoto' id='upload-label' aria-live='assertive'><i class="fas fa-upload"></i> Upload a Photo</label>
                     </li>
                     <li class='form-row'>
                         <button role='button' type='submit' id='submitPost' value='New post' aria-live='assertive'>Post</button>
