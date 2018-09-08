@@ -50,7 +50,7 @@ router.get('/', (req, res) => {
         })
         .catch(error => {
             console.error(error);
-            res.status(500).json({ error: 'something went wrong' });
+            res.status(500).json({ error: 'Something went wrong' });
         });
 });
 
@@ -67,7 +67,7 @@ router.get('/:id', (req, res) => {
                     })
                     .catch(err => {
                         console.error(err);
-                        res.status(500).json({ error: 'Something went wrong get Posts by ID' });
+                        res.status(500).json({ error: 'Something went wrong' });
                     });
             } else {
                 const message = 'User not found';
@@ -77,7 +77,7 @@ router.get('/:id', (req, res) => {
         })
         .catch(err => {
             console.error(err);
-            res.status(400).json({ error: 'Something went wrong: GET posts by user ID' });
+            res.status(400).json({ error: 'Something went wrong' });
         });
 });
 
@@ -85,8 +85,8 @@ router.post('/', (req, res) => {
     const requiredFields = ['image'];
     for (let i = 0; i < requiredFields.length; i++) {
         const field = requiredFields[i];
-        if (!(field in req.body)) {
-            const message = `Missing \'${field}\' in request body`;
+        if (!(field in req.body) || !(req.body[field])) {
+            const message = `Please upload an ${field}`;
             console.error(message);
             return res.status(400).json({error: message});
         }
@@ -121,7 +121,7 @@ router.post('/', (req, res) => {
         })
         .catch(err => {
             console.error(err);
-            res.status(400).json({ error: 'Something went wrong: POST User' });
+            res.status(400).json({ error: 'Something went wrong' });
         });
 });
 
@@ -148,7 +148,7 @@ router.put('/:id', (req, res) => {
         .then(updatedPost => res.status(201).json(updatedPost.serialize()))
         .catch(err => {
             console.error(err);
-            res.status(400).json({ message: 'Something went wrong: PUT FeedPost' });
+            res.status(400).json({ error: 'Something went wrong' });
         });
 });
 
@@ -160,7 +160,7 @@ router.delete('/:id', (req, res) => {
         })
         .catch(err => {
             console.error(err);
-            res.status(500).json({ error: 'something went wrong: DELETE FeedPost' })
+            res.status(500).json({ error: 'something went wrong' })
         });
 });
 

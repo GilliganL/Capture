@@ -17,11 +17,11 @@ function listenForNewPost() {
 function listenForSubmitPost() {
     $('#post-form').on('submit', event => {
         event.preventDefault();
-
+        $('#submit-error-row').addClass('hidden');
         let image = $('#save-url').val();
         let caption = $('#caption').val();
 
-        $('#upload-label').text('Ready');
+        $('#upload-span').text('Upload a Photo');
         $('#upload-label').css('color', '#372D3B');
         $('#uploadPhoto').val('');
         $('#caption').val('');
@@ -38,7 +38,8 @@ function listenForSubmitPost() {
             type: 'POST',
             success: () => getAndDisplayFeedPosts(),
             error: (res) => {
-                alert(res.responseJSON.error);
+                $('#submit-error').html(res.responseJSON.error);
+                $('#submit-error-row').removeClass('hidden');
             }
         });
     });
@@ -54,7 +55,7 @@ function getFeedPosts(callback) {
         type: 'GET',
         success: (data) => callback(data),
         error: (res) => {
-            alert(res.responseJSON.error);
+            window.location = '/';
         }
     });
 }

@@ -2,7 +2,7 @@
 function listenForLogin() {
     $('#login-form').on('submit', event => {
         event.preventDefault();
-
+        $('#login-error-row').addClass('hidden');
         let username = $('#login-username').val().trim();
         let password = $('#login-password').val().trim();
 
@@ -27,7 +27,8 @@ function login(username, password) {
             window.location = '/feed';
         }),
         error: () => {
-            alert('Please enter a valid username and password');
+            $('#login-error').html('Please enter a valid username and password');
+            $('#login-error-row').removeClass('hidden');
         }
     });
 }
@@ -48,8 +49,8 @@ function listenForLogoutButton() {
                 delete localStorage.id;
                 window.location = '/';
             },
-            error: (res) => {
-                alert(res.responseText);
+            error: () => {
+                console.error('Something went wrong');
             }
         });
     });
@@ -58,7 +59,7 @@ function listenForLogoutButton() {
 function listenForSignUpButton() {
     $('#sign-up-form').on('submit', event => {
         event.preventDefault();
-
+        $('#signup-error-row').addClass('hidden');
         let firstName = $('#firstName').val().trim();
         let lastName = $('#lastName').val().trim();
         let username = $('#username').val();
@@ -80,7 +81,8 @@ function listenForSignUpButton() {
                 login(username, password);
             },
             error: (res) => {
-                alert(res.responseText);
+                $('#signup-error').html(res.responseJSON.error);
+                $('#signup-error-row').removeClass('hidden');
             }
         });
     });
@@ -90,7 +92,6 @@ function listenForDemoButton() {
     $('.nav-bar').on('click', '#demo-button', function(event) {
         event.preventDefault();
 
-        console.log('view demo ran')
         let username = 'lynsey';
         let password = 'password';
 

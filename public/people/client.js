@@ -5,7 +5,7 @@
 function listenForSubmitForm() {
     $('.profile-form').on('submit', event => {
         event.preventDefault();
-
+        $('#submit-error-row').addClass('hidden');
         let image = $('#save-url').val();
         let firstName = $('#firstName').val().trim();
         let lastName = $('#lastName').val().trim();
@@ -13,7 +13,7 @@ function listenForSubmitForm() {
         let state = $('#state').val().trim();
         let email = $('#email').val().trim();
 
-        $('#upload-label').text('Ready');
+        $('#upload-span').text('Upload a Photo');
         $('#upload-label').css('color', '#372D3B');
 
         $.ajax({
@@ -28,7 +28,8 @@ function listenForSubmitForm() {
             type: 'PUT',
             success: () => getAndDisplayProfile(),
             error: (res) => {
-                console.log(res);
+                $('#submit-error').html(res.responseJSON.error);
+                $('#submit-error-row').removeClass('hidden');
             }
         });
     });
@@ -58,8 +59,8 @@ function getProfile(callback) {
         },
         type: 'GET',
         success: (data) => callback(data),
-        error: (res) => {
-            alert(res.responseText);
+        error: () => {
+            window.location = '/';
         }
     });
 }
@@ -106,8 +107,8 @@ function getPeople(callback) {
         },
         type: 'GET',
         success: (data) => callback(data),
-        error: (res) => {
-            alert(res.responseText);
+        error: () => {
+            window.location = '/';
         }
     });
 }

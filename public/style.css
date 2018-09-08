@@ -290,8 +290,18 @@ textarea {
     border-radius: 5px;
 }
 
+#login-error,
+#signup-error,
+#submit-error {
+    width: 100%;
+    font-size: 18px;
+}
+
+#submit-error {
+    text-align: center;
+}
+
 .uploadPhoto {
-    /* position: absolute; */
     width: 0.1px;
     height: 0.1px;
     opacity: 0;
