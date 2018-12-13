@@ -14,16 +14,16 @@ Node, Express, MongoDB, AWS S3, Mongoose, Passport, JWT, Heroku, Travis, mLab, R
 Javascript, JQuery, CSS, HTML
 
 ## Screenshots
-![Landing Page](https://s3.amazonaws.com/postcard-photo-repo-dev/Screenshots/Landing.PNG)
+![Landing Page](https://s3.amazonaws.com/postcard-photo-repo-dev/screenshots/Landing.PNG)
 
-![Login & Signup](https://s3.amazonaws.com/postcard-photo-repo-dev/Screenshots/login.PNG)
+![Login & Signup](https://s3.amazonaws.com/postcard-photo-repo-dev/screenshots/login.PNG)
 
-![Timeline of users Postcards](https://s3.amazonaws.com/postcard-photo-repo-dev/Screenshots/Timeline.PNG)
+![Timeline of users Postcards](https://s3.amazonaws.com/postcard-photo-repo-dev/screenshots/Timeline.PNG)
 
-![Responsive View of Timeline](https://s3.amazonaws.com/postcard-photo-repo-dev/Screenshots/responsive.PNG)
+![Responsive View of Timeline](https://s3.amazonaws.com/postcard-photo-repo-dev/screenshots/responsive.PNG)
 
-![New Post Form](https://s3.amazonaws.com/postcard-photo-repo-dev/Screenshots/New+Post.PNG)
+![New Post Form](https://s3.amazonaws.com/postcard-photo-repo-dev/screenshots/New+Post.PNG)
 
-![People](https://s3.amazonaws.com/postcard-photo-repo-dev/Screenshots/People.PNG)
+![People](https://s3.amazonaws.com/postcard-photo-repo-dev/screenshots/People.PNG)
 
-![Edit Profile Form](https://s3.amazonaws.com/postcard-photo-repo-dev/Screenshots/Edit+Profile.PNG)
+![Edit Profile Form](https://s3.amazonaws.com/postcard-photo-repo-dev/screenshots/Edit+Profile.PNG)
