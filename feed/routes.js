@@ -77,7 +77,7 @@ router.get('/:id', (req, res) => {
         })
         .catch(err => {
             console.error(err);
-            res.status(400).json({ error: 'Something went wrong' });
+            res.status(500).json({ error: 'Something went wrong' });
         });
 });
 
@@ -121,7 +121,7 @@ router.post('/', (req, res) => {
         })
         .catch(err => {
             console.error(err);
-            res.status(400).json({ error: 'Something went wrong' });
+            res.status(500).json({ error: 'Something went wrong' });
         });
 });
 
@@ -148,7 +148,7 @@ router.put('/:id', (req, res) => {
         .then(updatedPost => res.status(201).json(updatedPost.serialize()))
         .catch(err => {
             console.error(err);
-            res.status(400).json({ error: 'Something went wrong' });
+            res.status(500).json({ error: 'Something went wrong' });
         });
 });
 

@@ -2,15 +2,11 @@
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const faker = require('faker');
-const mongoose = require('mongoose');
 
 const expect = chai.expect;
 
-const { app, runServer, closeServer } = require('../server');
-const { FeedPost } = require('../feed/models');
-const { User } = require('../users/models');
-const { TEST_DATABASE_URL } = require('../config');
+const { app } = require('../server');
+
 
 chai.use(chaiHttp);
 

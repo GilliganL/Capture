@@ -356,6 +356,7 @@ select:-webkit-autofill:focus {
     border: 2px solid #D94362;
     -webkit-text-fill-color: #D94362;
     -webkit-box-shadow: 0 0 0 2px #D94362;
+    box-shadow: 0 0 0 2px #D94362;
     -webkit-transition: background-color .2s;
     -moz-transition: background-color .2s;
     -ms-transition: background-color .2s;
