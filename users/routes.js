@@ -35,7 +35,7 @@ router.post('/', (req, res) => {
         console.error(message);
         return res.status(400).json({ error: message });
     };
-
+    
     if (!(validator.isAlphanumeric(req.body.username)) || (req.body.username.trim() !== req.body.username)) {
         const message = 'Please use letters and numbers only in username';
         console.error(message);
