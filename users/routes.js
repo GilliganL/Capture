@@ -19,33 +19,34 @@ router.post('/', (req, res) => {
         if (!(field in req.body)) {
             const message = `Missing \'${field} \' in request body`;
             console.error(message);
-            return res.status(400).json({error: message});
+            return res.status(400).json({ error: message });
         }
     };
 
-    if (!(validator.isAlpha(req.body.firstName)) || !(validator.isAlpha(req.body.lastName)) || !(validator.isAlpha(req.body.city)) || !(validator.isAlpha(req.body.state))) {
+    const testExp = new RegExp("^[a-zA-Z \\\']+$");
+    if (!(testExp.test(req.body.firstName)) || !(testExp.test(req.body.lastName)) || !(testExp.test(req.body.city)) || !(testExp.test(req.body.state))) {
         const message = `First name, last name, city and state can only contain letters`;
         console.error(message);
-        return res.status(400).json({error: message});
+        return res.status(400).json({ error: message });
     };
 
     if (!(validator.isEmail(req.body.email))) {
         const message = `Please enter a valid email address`;
         console.error(message);
-        return res.status(400).json({error: message});
+        return res.status(400).json({ error: message });
     };
 
     if (!(validator.isAlphanumeric(req.body.username)) || (req.body.username.trim() !== req.body.username)) {
         const message = 'Please use letters and numbers only in username';
         console.error(message);
-        return res.status(400).json({error: message});
+        return res.status(400).json({ error: message });
     }
 
     if (!(passwordSchema.validate(req.body.password))) {
         const failed = passwordSchema.validate(req.body.password, { list: true });
         let message = 'Password must contain at least 8 characters including 1 uppercase letter and 1 number';
         console.error(message);
-        return res.status(400).json({error: message});
+        return res.status(400).json({ error: message });
     }
 
     User
@@ -54,7 +55,7 @@ router.post('/', (req, res) => {
             if (user) {
                 const message = 'username not available';
                 console.error(message);
-                return res.status(400).json({error: message});
+                return res.status(400).json({ error: message });
             }
             return User.hashPassword(req.body.password);
         })
@@ -111,35 +112,35 @@ router.put('/:id', (req, res) => {
         }
     })
 
-    if(updated.firstName) {
+    if (updated.firstName) {
         if (!(validator.isAlpha(updated.firstName))) {
             const message = `First name can only contain letters`;
             console.error(message);
-            return res.status(400).json({error: message});
+            return res.status(400).json({ error: message });
         };
     }
 
-    if(updated.lastName) {
+    if (updated.lastName) {
         if (!(validator.isAlpha(updated.lastName))) {
             const message = `last name can only contain letters`;
             console.error(message);
-            return res.status(400).json({error: message});
+            return res.status(400).json({ error: message });
         };
     }
 
-    if(updated.city) {
+    if (updated.city) {
         if (!(validator.isAlpha(updated.city))) {
             const message = `City can only contain letters`;
             console.error(message);
-            return res.status(400).json({error: message});
+            return res.status(400).json({ error: message });
         };
     }
 
-    if(updated.state) {
+    if (updated.state) {
         if (!(validator.isAlpha(updated.state))) {
             const message = `State can only contain letters`;
             console.error(message);
-            return res.status(400).json({error: message});
+            return res.status(400).json({ error: message });
         };
     }
 
@@ -147,7 +148,7 @@ router.put('/:id', (req, res) => {
         if (!(validator.isEmail(updated.email))) {
             const message = `Please enter a valid email address`;
             console.error(message);
-            return res.status(400).json({error: message});
+            return res.status(400).json({ error: message });
         } else {
             updated.email = req.body.email;
         };

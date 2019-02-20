@@ -179,6 +179,7 @@ describe('User API resource', function () {
                 .set('Authorization', `Bearer ${token}`)
                 .send(newUser)
                 .then(function (res) {
+                    console.log(res.body)
                     expect(res).to.have.status(201);
                     expect(res).to.be.json;
                     expect(res.body).to.be.a('object');
