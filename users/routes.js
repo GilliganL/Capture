@@ -23,6 +23,7 @@ router.post('/', (req, res) => {
         }
     };
 
+    //Test for alphabetical characters with spaces or apostrophes
     const testExp = new RegExp("^[a-zA-Z \\\']+$");
     if (!(testExp.test(req.body.firstName)) || !(testExp.test(req.body.lastName)) || !(testExp.test(req.body.city)) || !(testExp.test(req.body.state))) {
         const message = `First name, last name, city and state can only contain letters`;
@@ -35,7 +36,7 @@ router.post('/', (req, res) => {
         console.error(message);
         return res.status(400).json({ error: message });
     };
-    
+
     if (!(validator.isAlphanumeric(req.body.username)) || (req.body.username.trim() !== req.body.username)) {
         const message = 'Please use letters and numbers only in username';
         console.error(message);
@@ -112,8 +113,9 @@ router.put('/:id', (req, res) => {
         }
     })
 
+    const testExp = new RegExp("^[a-zA-Z \\\']+$");
     if (updated.firstName) {
-        if (!(validator.isAlpha(updated.firstName))) {
+        if (!(testExp.test(updated.firstName))) {
             const message = `First name can only contain letters`;
             console.error(message);
             return res.status(400).json({ error: message });
@@ -121,7 +123,7 @@ router.put('/:id', (req, res) => {
     }
 
     if (updated.lastName) {
-        if (!(validator.isAlpha(updated.lastName))) {
+        if (!(testExp.test(updated.lastName))) {
             const message = `last name can only contain letters`;
             console.error(message);
             return res.status(400).json({ error: message });
@@ -129,7 +131,7 @@ router.put('/:id', (req, res) => {
     }
 
     if (updated.city) {
-        if (!(validator.isAlpha(updated.city))) {
+        if (!(testExp.test(updated.city))) {
             const message = `City can only contain letters`;
             console.error(message);
             return res.status(400).json({ error: message });
@@ -137,7 +139,7 @@ router.put('/:id', (req, res) => {
     }
 
     if (updated.state) {
-        if (!(validator.isAlpha(updated.state))) {
+        if (!(testExp.test(updated.state))) {
             const message = `State can only contain letters`;
             console.error(message);
             return res.status(400).json({ error: message });
